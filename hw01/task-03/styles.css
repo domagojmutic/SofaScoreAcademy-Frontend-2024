@@ -48,10 +48,11 @@ hr {
 }
 
 form label {
-    display: none;
+    width: 0;
+    height: 0;
 }
 
-form input {
+form input,textarea {
     padding: 4px;
     margin-bottom: 8px;
 
