@@ -8,6 +8,38 @@
     <title>QuickQuiz</title>
 </head>
 <body>
-    
+    <div>
+        <h2 id="quiz-title">QuickQuiz</h2>
+        <button id="quiz-start">Start</button>
+        <div id="quiz-content"></div>
+    </div>
+
+    <template id="template-question">
+        <div>
+            <h4 id="template-question-text"></h4>
+            <div id="template-answer-container"></div>
+            <button id="template-next">Next</button>
+        </div>
+    </template>
+    <template id="template-answer">
+        <button id="template-answer-button">
+            <span id="template-answer-letter"></span>
+            <span id="template-answer-text"></span>
+        </button>
+    </template>
+    <template id="template-score">
+        <div>
+            <h4>Score</h4>
+            <span id="template-correct"></span>
+            <span id="template-divider">/</span>
+            <span id="template-total"></span>
+            <div id="template-question-list">
+                <div>
+                    <span>Order / Answer / Correct</span>
+                </div>
+            </div>
+            <button id="template-home">Home</button>
+        </div>
+    </template>
 </body>
 </html>
