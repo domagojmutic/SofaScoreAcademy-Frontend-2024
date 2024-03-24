@@ -1,45 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" type="module" defer></script>
-    <title>QuickQuiz</title>
-</head>
-<body>
-    <div>
-        <h2 id="quiz-title">QuickQuiz</h2>
-        <button id="quiz-start">Start</button>
-        <div id="quiz-content"></div>
-    </div>
-
-    <template id="template-question">
-        <div>
-            <h4 id="template-question-text"></h4>
-            <div id="template-answer-container"></div>
-            <button id="template-next">Next</button>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="script.js" type="module" defer></script>
+        <title>QuickQuiz</title>
+    </head>
+    <body>
+        <div
+            class="container flex justify-center text-center mx-auto py-3 h-full text-gray-950"
+        >
+            <div class="relative w-[360px] max-xl:w-[720px] px-4">
+                <h2 id="quiz-title" class="text-2xl font-bold">QuickQuiz</h2>
+                <div
+                    id="quiz-config"
+                    class="relative mt-4 w-[360px] rounded-md mx-auto"
+                    style="aspect-ratio: 2.5 / 3.5"
+                >
+                    <div
+                        class="scroll flex flex-col p-4 h-full w-full absolute shadow-md rounded-md border border-gray-300 bg-white overflow-auto"
+                    >
+                        <label for="config-questions-range" class="text-lg"
+                            >Number of questions</label
+                        >
+                        <div class="flex flex-row mb-2">
+                            <input
+                                type="range"
+                                id="config-questions-range"
+                                name="config-questions-range"
+                                min="2"
+                                max="20"
+                                value="15"
+                                class="flex-1 mr-2"
+                            />
+                            <input
+                                type="number"
+                                id="config-questions"
+                                name="config-questions"
+                                min="2"
+                                value="15"
+                                class="w-12 rounded-sm border border-gray-400 hover:border-gray-700 pl-1"
+                            />
+                        </div>
+                        <label for="config-category" class="text-lg"
+                            >Category</label
+                        >
+                        <select
+                            name="config-category"
+                            id="config-category"
+                            class="mb-2 rounded-sm border border-gray-400 hover:border-gray-700 pl-1 bg-white"
+                        >
+                            <option value="">Any Category</option>
+                            <option value="9">General Knowledge</option>
+                            <option value="10">Entertainment: Books</option>
+                            <option value="11">Entertainment: Film</option>
+                            <option value="12">Entertainment: Music</option>
+                            <option value="13">
+                                Entertainment: Musicals &amp; Theatres
+                            </option>
+                            <option value="14">
+                                Entertainment: Television
+                            </option>
+                            <option value="15">
+                                Entertainment: Video Games
+                            </option>
+                            <option value="16">
+                                Entertainment: Board Games
+                            </option>
+                            <option value="17">Science &amp; Nature</option>
+                            <option value="18">Science: Computers</option>
+                            <option value="19">Science: Mathematics</option>
+                            <option value="20">Mythology</option>
+                            <option value="21">Sports</option>
+                            <option value="22">Geography</option>
+                            <option value="23">History</option>
+                            <option value="24">Politics</option>
+                            <option value="25">Art</option>
+                            <option value="26">Celebrities</option>
+                            <option value="27">Animals</option>
+                            <option value="28">Vehicles</option>
+                            <option value="29">Entertainment: Comics</option>
+                            <option value="30">Science: Gadgets</option>
+                            <option value="31">
+                                Entertainment: Japanese Anime &amp; Manga
+                            </option>
+                            <option value="32">
+                                Entertainment: Cartoon &amp; Animations
+                            </option>
+                        </select>
+                        <label for="config-difficulty" class="text-lg"
+                            >Difficulty</label
+                        >
+                        <select
+                            name="config-difficulty"
+                            id="config-difficulty"
+                            class="mb-2 rounded-sm border border-gray-400 hover:border-gray-700 pl-1 bg-white"
+                        >
+                            <option value="">Any Difficulty</option>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                        <label for="config-type" class="text-lg"
+                            >Question type</label
+                        >
+                        <select
+                            name="config-type"
+                            id="config-type"
+                            class="mb-2 rounded-sm border border-gray-400 hover:border-gray-700 pl-1 bg-white"
+                        >
+                            <option value="">Any Type</option>
+                            <option value="multiple">Multiple Choice</option>
+                            <option value="boolean">True / False</option>
+                        </select>
+                        <button
+                            id="quiz-start"
+                            class="px-3 py-1 mt-auto rounded-md align-text-top bg-green-500 text-white hover:bg-green-600"
+                        >
+                            Start
+                        </button>
+                    </div>
+                </div>
+                <div
+                    id="quiz-content"
+                    class="relative mt-4 w-[360px] rounded-md max-md:w-[300px] max-sm:w-[280px]"
+                    style="
+                        aspect-ratio: 2.5 / 3.5;
+                        perspective: 4000px;
+                        display: none;
+                    "
+                ></div>
+            </div>
         </div>
-    </template>
-    <template id="template-answer">
-        <button id="template-answer-button">
-            <span id="template-answer-letter"></span>
-            <span id="template-answer-text"></span>
-        </button>
-    </template>
-    <template id="template-score">
-        <div>
-            <h4>Score</h4>
-            <span id="template-correct"></span>
-            <span id="template-divider">/</span>
-            <span id="template-total"></span>
-            <div id="template-question-list">
-                <div>
-                    <span>Order / Answer / Correct</span>
+
+        <template id="template-playing-card">
+            <div
+                id="template-playing-card"
+                class="playing-card absolute h-full w-full"
+            >
+                <div
+                    id="template-card-back"
+                    class="playing-card-back h-full w-full rounded-md"
+                    style="aspect-ratio: 2.5 / 3.5"
+                ></div>
+            </div>
+        </template>
+        <template id="template-question">
+            <div
+                class="scroll flex flex-col p-4 h-full w-full absolute shadow-md rounded-md border border-gray-300 bg-white overflow-auto"
+            >
+                <h4 id="template-question-text" class="text-left text-lg"></h4>
+                <hr />
+                <div
+                    id="template-answer-container"
+                    class="mt-2 flex flex-col w-full"
+                ></div>
+                <div class="mr-1 mt-auto relative flex justify-between">
+                    <button
+                        id="template-prev"
+                        class="py-1 px-2 hover:bg-gray-50"
+                    >
+                        PREV
+                    </button>
+                    <div></div>
+                    <button
+                        id="template-next"
+                        class="py-1 px-2 opacity-20 hover:bg-gray-50"
+                        disabled
+                    >
+                        NEXT
+                    </button>
+                    <span
+                        id="template-lock-timer"
+                        class="absolute right-6 top-1 text-gray-950"
+                        >5</span
+                    >
                 </div>
             </div>
-            <button id="template-home">Home</button>
-        </div>
-    </template>
-</body>
+        </template>
+        <template id="template-answer">
+            <button
+                id="template-answer-button"
+                class="p-1 my-1 w-full text-left border rounded-md border-gray-300 hover:bg-gray-50"
+            >
+                <span id="template-answer-letter" class="mr-1"></span>
+                <span id="template-answer-text"></span>
+            </button>
+        </template>
+        <template id="template-score">
+            <div
+                class="scroll flex flex-col p-4 h-full w-full absolute shadow-md rounded-md border border-gray-300 bg-white overflow-auto"
+            >
+                <h4 class="text-lg">Score</h4>
+                <div>
+                    <span id="template-correct"></span>
+                    <span id="template-divider">/</span>
+                    <span id="template-total"></span>
+                </div>
+                <table id="template-question-list" class="mt-2">
+                    <thead>
+                        <tr class="border-b border-gray-200">
+                            <th>Order</th>
+                            <th>Answer</th>
+                            <th>Correct</th>
+                        </tr>
+                    </thead>
+                </table>
+                <button
+                    id="template-home"
+                    class="py-1 px-2 ml-auto mr-1 mt-auto hover:bg-gray-50"
+                >
+                    HOME
+                </button>
+            </div>
+        </template>
+
+        <dialog id="loading-dialog" class="overflow-hidden rounded-full">
+            <svg
+                class="animate-spin h-10 w-10 text-blue-700"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+            >
+                <circle
+                    class="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    stroke-width="4"
+                ></circle>
+                <path
+                    class="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+            </svg>
+        </dialog>
+    </body>
 </html>
