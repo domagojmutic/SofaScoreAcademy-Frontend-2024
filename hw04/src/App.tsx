@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import Header from "./components/Header";
 
 type themes = "light" | "dark";
 
@@ -25,6 +26,7 @@ function App() {
 
   return (
     <div className="min-w-screen min-h-screen flex flex-col bg-page-lt dark:bg-page-dt">
+      <Header />
     </div>
   );
 }
