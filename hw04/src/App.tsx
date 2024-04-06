@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
+import PokeList from "./components/PokeList";
 import ThemeContext from "./context/ThemeContext";
 import { Themes } from "./models/models";
 
@@ -27,6 +28,7 @@ function App() {
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <div className="min-w-screen min-h-screen flex flex-col bg-page-lt dark:bg-page-dt">
         <Header />
+        <PokeList />
       </div>
     </ThemeContext.Provider>
   );
