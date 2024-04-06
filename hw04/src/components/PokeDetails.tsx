@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import IsFavoriteContext from "../context/IsFavoriteContext";
 import { Pokemon } from "../models/models";
 import Tag from "./Tag";
 
@@ -10,6 +12,8 @@ interface Props {
 
 function PokeDetails(props: Props) {
   const { side, pokemon } = props;
+
+  const { isFavorite } = useContext(IsFavoriteContext);
 
   return (
     <div
@@ -58,12 +62,20 @@ function PokeDetails(props: Props) {
           <div className="flex flex-row h-[160px] justify-between max-md:justify-center items-center flex-wrap">
             <img
               className="w-[160px] h-[160px] max-lg:w-[140px] max-lg:h-[140px]"
-              src={pokemon.sprites.front_default}
+              src={
+                isFavorite
+                  ? pokemon.sprites.front_shiny
+                  : pokemon.sprites.front_default
+              }
               alt={pokemon.name + " front"}
             />
             <img
               className="w-[160px] h-[160px] max-lg:w-[140px] max-lg:h-[140px]"
-              src={pokemon.sprites.back_default}
+              src={
+                isFavorite
+                  ? pokemon.sprites.back_shiny
+                  : pokemon.sprites.back_default
+              }
               alt={pokemon.name + " back"}
             />
           </div>

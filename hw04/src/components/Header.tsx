@@ -1,5 +1,5 @@
 import pokeball from "../assets/Pokeball.svg";
-import heart from "../assets/Heart.svg";
+import heart from "../assets/Heart_header.svg";
 import settings from "../assets/Settings.svg";
 import ConfigMenu from "./ConfigMenu";
 

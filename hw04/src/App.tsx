@@ -3,9 +3,11 @@ import "./App.css";
 import Header from "./components/Header";
 import PokeList from "./components/PokeList";
 import ThemeContext from "./context/ThemeContext";
-import { Themes } from "./models/models";
+import { Pokemon, Themes } from "./models/models";
+import FavoritesContext from "./context/FavoritesContext";
 
 function App() {
+  const [favorites, setFavorites] = useState<Pokemon[]>([]);
   const [theme, setTheme] = useState<Themes>("auto");
 
   useEffect(() => {
@@ -27,8 +29,10 @@ function App() {
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <div className="min-w-screen min-h-screen flex flex-col bg-page-lt dark:bg-page-dt">
-        <Header />
-        <PokeList />
+        <FavoritesContext.Provider value={{ pokemon: favorites, setPokemon: setFavorites }}>
+          <Header />
+          <PokeList />
+        </FavoritesContext.Provider>
       </div>
     </ThemeContext.Provider>
   );
