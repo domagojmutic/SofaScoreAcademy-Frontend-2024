@@ -6,12 +6,17 @@ import settingsHover from "../assets/Settings_hover.svg";
 import ConfigMenu from "./ConfigMenu";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import FavoritesList from "./FavoritesList";
 
 function Header() {
   const [configOpened, setConfigOpened] = useState(false);
+  const [favoritesOpened, setFavoritesOpened] = useState(false);
   const [hoveringSettings, setHoveringSettings] = useState(false);
   const [hoveringHeart, setHoveringHeart] = useState(false);
 
+  function closeFavorites() {
+    setFavoritesOpened(false);
+  }
   return (
     <div className="sticky top-0 w-full h-[85px] px-[45px] flex flex-row justify-between items-center z-50 phone:h-[45px] phone:pl-[11px] phone:pr-[17px] bg-header-lt dark:bg-header-dt">
       <div className="flex flex-row items-center">
@@ -25,7 +30,10 @@ function Header() {
         </h1>
       </div>
       <div className="flex flex-row items-center">
-        <button className="relative">
+        <button
+          className="relative"
+          onClick={() => setFavoritesOpened((old) => !old)}
+        >
           <img
             className="phone:w-[25px] phone:h-[25px]"
             src={heart}
@@ -34,7 +42,7 @@ function Header() {
           <motion.img
             className="phone:w-[25px] phone:h-[25px] absolute top-0 opacity-0 transition-opacity duration-300 ease-in-out"
             style={
-              configOpened || hoveringHeart ? { opacity: 1 } : { opacity: 0 }
+              favoritesOpened || hoveringHeart ? { opacity: 1 } : { opacity: 0 }
             }
             src={heartHover}
             alt="Heart"
@@ -66,6 +74,11 @@ function Header() {
       <AnimatePresence>
         {configOpened && (
           <ConfigMenu opened={configOpened} changeState={setConfigOpened} />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {favoritesOpened && (
+          <FavoritesList opened={favoritesOpened} close={closeFavorites} />
         )}
       </AnimatePresence>
     </div>
