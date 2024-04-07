@@ -1,11 +1,20 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import PokeItem from "./PokeItem";
 import { Pokemon } from "../models/models";
 import { getPokemonList } from "../api/pokemon";
+import IsSmallDisplayContext from "../context/IsSmallDisplayContext.js";
 
 function PokeList() {
   const loadLine = useRef(null);
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
+  const [onlyLeft, setOnlyLeft] = useState<boolean>(false);
+  const isSmallDisplay = useContext(IsSmallDisplayContext);
+
+  useEffect(() => {
+    if (isSmallDisplay) setOnlyLeft(true);
+    else setOnlyLeft(false);
+  }, [isSmallDisplay]);
+
   useEffect(() => {
     let startIndex = 0;
     const loadLineLocal = loadLine;
@@ -35,7 +44,7 @@ function PokeList() {
         return (
           <PokeItem
             pokemon={pokemon}
-            side={index % 2 === 0 ? "right" : "left"}
+            side={onlyLeft ? "left" : index % 2 === 0 ? "right" : "left"}
             key={pokemon.id}
           />
         );

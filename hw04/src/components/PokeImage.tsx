@@ -2,6 +2,7 @@ import { Pokemon } from "../models/models";
 import { useContext } from "react";
 import IsFavoriteContext from "../context/IsFavoriteContext";
 import { AnimatePresence, motion } from "framer-motion";
+import IsSmallDisplayContext from "../context/IsSmallDisplayContext";
 
 type sideType = "left" | "right";
 
@@ -14,6 +15,17 @@ function PokeImage(props: Props) {
   const { animation_side, pokemon } = props;
 
   const { isFavorite } = useContext(IsFavoriteContext);
+  const isSmallDisplay = useContext(IsSmallDisplayContext);
+
+  function getOffset() {
+    if (animation_side === "right") {
+      if (isSmallDisplay) return "calc(100vw + 50%)";
+      else return "calc(100% + 60px)";
+    } else if (animation_side === "left") {
+      if (isSmallDisplay) return "calc(-100vw - 50%)";
+      else return "calc(-100% - 60px)";
+    } else return "";
+  }
 
   const variants = {
     in: {
@@ -27,30 +39,22 @@ function PokeImage(props: Props) {
         delay: 1,
       },
     },
-    out:
-      animation_side === "right"
-        ? {
-            left: "calc(100% + 60px)",
-            transition: {
-              type: "spring",
-              stiffness: 216,
-              damping: 29.3,
-              mass: 1,
-              duration: 0.41,
-              delay: 0,
-            },
-          }
-        : {
-            left: "calc(-100% - 60px)",
-            transition: {
-              type: "spring",
-              stiffness: 216,
-              damping: 29.3,
-              mass: 1,
-              duration: 0.41,
-              delay: 0,
-            },
-          },
+    out: {
+      left: getOffset(),
+      transition: {
+        type: "spring",
+        stiffness: 216,
+        damping: 29.3,
+        mass: 1,
+        duration: 0.41,
+        delay: 0,
+      },
+    },
+    init: animation_side
+      ? {
+          left: getOffset(),
+        }
+      : {},
   };
 
   return (
@@ -64,13 +68,7 @@ function PokeImage(props: Props) {
             : pokemon.sprites.front_default_big
         }
         alt={pokemon.name}
-        initial={
-          animation_side
-            ? animation_side === "right"
-              ? { left: "calc(100% + 60px)" }
-              : { left: "calc(-100% - 60px)" }
-            : {}
-        }
+        initial={"init"}
         animate={"in"}
         exit={"out"}
         key={pokemon.id + "-image-" + isFavorite}
