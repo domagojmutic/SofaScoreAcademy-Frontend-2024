@@ -16,35 +16,21 @@ function PokeImage(props: Props) {
   const { isFavorite } = useContext(IsFavoriteContext);
 
   const variants = {
-    in:
-      animation_side === "right"
-        ? {
-            right: "0px",
-            transition: {
-              type: "spring",
-              stiffness: 216,
-              damping: 29.3,
-              mass: 1,
-              duration: 0.41,
-              delay: 1,
-            },
-            // transition: { delay: 1, duration: 0.4, ease: "easeOut" },
-          }
-        : {
-            left: "0px",
-            transition: {
-              type: "spring",
-              stiffness: 216,
-              damping: 29.3,
-              mass: 1,
-              duration: 0.41,
-              delay: 1,
-            },
-          },
+    in: {
+      left: "0px",
+      transition: {
+        type: "spring",
+        stiffness: 216,
+        damping: 29.3,
+        mass: 1,
+        duration: 0.41,
+        delay: 1,
+      },
+    },
     out:
       animation_side === "right"
         ? {
-            right: "-460px",
+            left: "calc(100% + 60px)",
             transition: {
               type: "spring",
               stiffness: 216,
@@ -55,7 +41,7 @@ function PokeImage(props: Props) {
             },
           }
         : {
-            left: "-460px",
+            left: "calc(-100% - 60px)",
             transition: {
               type: "spring",
               stiffness: 216,
@@ -81,8 +67,8 @@ function PokeImage(props: Props) {
         initial={
           animation_side
             ? animation_side === "right"
-              ? { right: "-460px" }
-              : { left: "-460px" }
+              ? { left: "calc(100% + 60px)" }
+              : { left: "calc(-100% - 60px)" }
             : {}
         }
         animate={"in"}

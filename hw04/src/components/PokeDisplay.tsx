@@ -15,7 +15,7 @@ function PokeDisplay(props: Props) {
   return (
     <div
       className={
-        "relative w-full h-full px-[60px] flex items-center flex-1 phone:order-1 phone:justify-center phone:px-[30px] " +
+        "relative w-full h-full px-[60px] flex items-center flex-1 phone:order-1 phone:justify-center phone:px-[30px] max-md:px-[50px] max-sm:px-[45px] " +
         (side === "right" ? "justify-end" : "order-2 justify-start")
       }
     >

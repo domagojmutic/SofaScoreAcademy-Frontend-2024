@@ -16,7 +16,7 @@ function PokeDetails(props: Props) {
   return (
     <div
       className={
-        "w-full h-full px-[60px] flex flex-col flex-1 justify-center items-start bg-details-lt dark:bg-details-dt phone:order-2 phone:px-[30px] z-30 " +
+        "w-full h-full px-[60px] flex flex-col flex-1 justify-center items-start bg-details-lt dark:bg-details-dt phone:order-2 phone:px-[30px] max-md:px-[50px] max-sm:px-[45px] z-30 " +
         (side === "right" ? "" : "order-1")
       }
     >
