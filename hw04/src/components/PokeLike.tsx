@@ -8,15 +8,12 @@ import ThemeContext from "../context/ThemeContext";
 import IsFavoriteContext from "../context/IsFavoriteContext";
 import { AnimatePresence, motion } from "framer-motion";
 
-type sideType = "left" | "right";
-
 interface Props {
-  side: sideType;
   pokemon: Pokemon;
 }
 
 function PokeLike(props: Props) {
-  const { side, pokemon } = props;
+  const { pokemon } = props;
 
   const { setPokemon: setFavorites } = useContext(FavoritesContext);
   const { theme } = useContext(ThemeContext);
@@ -46,10 +43,7 @@ function PokeLike(props: Props) {
   return (
     <AnimatePresence>
       <motion.button
-        className={
-          "absolute top-[15px] phone:right-[11px] phone:bottom-[11px] phone:top-auto phone:left-auto " +
-          (side === "right" ? "right-[15px]" : "left-[15px]")
-        }
+        className="absolute"
         onClick={() => updateFavorites()}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -58,7 +52,7 @@ function PokeLike(props: Props) {
         key={pokemon.id + "-like-" + isFavorite}
       >
         <img
-          className="text-favorite-icon w-[35px] h-[35px] phone:w-[25px] phone:h-[25px]"
+          className="text-favorite-icon w-full h-full"
           src={isFavorite ? heartColor : heart}
           alt="Heart"
         />

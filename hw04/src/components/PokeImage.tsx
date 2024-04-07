@@ -6,20 +6,20 @@ import { AnimatePresence, motion } from "framer-motion";
 type sideType = "left" | "right";
 
 interface Props {
-  side: sideType;
+  animation_side?: sideType;
   pokemon: Pokemon;
 }
 
 function PokeImage(props: Props) {
-  const { side, pokemon } = props;
+  const { animation_side, pokemon } = props;
 
   const { isFavorite } = useContext(IsFavoriteContext);
 
   const variants = {
     in:
-      side === "right"
+      animation_side === "right"
         ? {
-            right: "60px",
+            right: "0px",
             transition: {
               type: "spring",
               stiffness: 216,
@@ -31,7 +31,7 @@ function PokeImage(props: Props) {
             // transition: { delay: 1, duration: 0.4, ease: "easeOut" },
           }
         : {
-            left: "60px",
+            left: "0px",
             transition: {
               type: "spring",
               stiffness: 216,
@@ -42,7 +42,7 @@ function PokeImage(props: Props) {
             },
           },
     out:
-      side === "right"
+      animation_side === "right"
         ? {
             right: "-460px",
             transition: {
@@ -70,15 +70,21 @@ function PokeImage(props: Props) {
   return (
     <AnimatePresence>
       <motion.img
-        variants={variants}
-        className="w-[400px] h-[400px] absolute phone:w-[300px] phone:h-[300px] max-sm:w-[350px] max-sm:h-[350px]"
+        variants={animation_side ? variants : {}}
+        className="absolute w-full h-full"
         src={
           isFavorite
             ? pokemon.sprites.front_shiny_big
             : pokemon.sprites.front_default_big
         }
         alt={pokemon.name}
-        initial={side === "right" ? { right: "-460px" } : { left: "-460px" }}
+        initial={
+          animation_side
+            ? animation_side === "right"
+              ? { right: "-460px" }
+              : { left: "-460px" }
+            : {}
+        }
         animate={"in"}
         exit={"out"}
         key={pokemon.id + "-image-" + isFavorite}
