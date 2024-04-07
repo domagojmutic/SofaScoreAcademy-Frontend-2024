@@ -24,7 +24,11 @@ function Tag(props: PropsWithChildren<{ type: PokemonTypes }>) {
   return (
     <div
       className="w-[68px] h-[16px] ml-[7px] flex justify-center items-start rounded-full text-page-lt dark:text-page-dt"
-      style={{ backgroundColor: typeColor[type] }}
+      style={
+        typeColor[type]
+          ? { backgroundColor: typeColor[type] }
+          : { backgroundColor: "#A9A9A9" }
+      }
     >
       {children}
     </div>
