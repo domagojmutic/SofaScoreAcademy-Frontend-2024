@@ -16,6 +16,11 @@ const typeColor = {
   ghost: "#705898",
   steel: "#B8B8D0",
   fairy: "#F0B6BC",
+  bug: "#A8B820",
+
+  dragon: "#7038F8",
+  dark: "#705848",
+  rock: "#B8A038",
 };
 
 function Tag(props: PropsWithChildren<{ type: PokemonTypes }>) {
