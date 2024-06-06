@@ -4,7 +4,7 @@ import { ThemeContextProvider } from '@/context/ThemeContext'
 import { sports } from '@/api/routes'
 import Footer from '@/modules/footer/Footer'
 import Header from '@/modules/header/Header'
-import { Flex, Box } from '@kuma-ui/core'
+import { Flex, Box, Spacer } from '@kuma-ui/core'
 import { KumaRegistry } from '@kuma-ui/next-plugin/registry'
 import { Metadata } from 'next'
 
@@ -32,6 +32,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 <Box as="main" flexGrow="1">
                   {children}
                 </Box>
+                <Spacer size="48px" />
                 <Footer />
               </Flex>
             </body>

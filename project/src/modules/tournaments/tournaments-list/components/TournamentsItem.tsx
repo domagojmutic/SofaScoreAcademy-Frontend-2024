@@ -11,7 +11,7 @@ export default function TournamentsListItem({ tournament, params }: TournamentsL
   return (
     <Box
       as={Link}
-      href={'/' + params.sport + '/tournaments/' + tournament.slug}
+      href={'/' + params.sport + '/tournaments/' + tournament.id + '/matches'}
       paddingX="spacings.lg"
       paddingY="spacings.sm"
       display="flex"

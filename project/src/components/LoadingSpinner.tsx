@@ -1,6 +1,6 @@
 import { Box, BoxProps, css } from '@kuma-ui/core'
 
-export default function Separator({
+export default function LoadingSpinner({
   size,
   ...rest
 }: {

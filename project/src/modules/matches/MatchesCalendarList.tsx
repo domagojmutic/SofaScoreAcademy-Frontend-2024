@@ -120,18 +120,20 @@ export default function MatchesCalendarList({ sport, date, matchesServer }: Matc
               </Fragment>
             )
           })}
-        {!isLoading && !isValidating && matchesByLeague.length <= 0 && (
+
+        {(isLoading || (matches && matches.length > 0 && matchesByLeague.length <= 0)) && (
+          <>
+            <MatchesTournamentHeaderSkeleton />
+            <MatchesList />
+          </>
+        )}
+
+        {!isLoading && !isValidating && matches && matches.length <= 0 && (
           <Flex justify="center" alignItems="center" paddingTop="spacings.md">
             <Text color="colors.onSurface.nLv1" fontWeight="bold">
               No Events
             </Text>
           </Flex>
-        )}
-        {isLoading && (
-          <>
-            <MatchesTournamentHeaderSkeleton />
-            <MatchesList />
-          </>
         )}
       </Card>
     </>
