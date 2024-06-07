@@ -1,3 +1,3 @@
-export default function TournamentsPage() {
+export default function TournamentMatchesPage() {
   return <></>
 }

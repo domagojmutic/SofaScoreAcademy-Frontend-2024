@@ -99,3 +99,21 @@ export interface PeriodIncident {
 }
 
 export type EventIncident = CardIncident | GoalIncident | PeriodIncident
+
+export interface Standings {
+  id: number
+  tournament: Tournament
+  type: 'home' | 'away' | 'total'
+  sortedStandingsRows: {
+    id: number
+    team: Team
+    points: number
+    scoresFor: number
+    scoresAgainst: number
+    played: number
+    wins: number
+    draws: number
+    losses: number
+    percentage: number
+  }[]
+}
