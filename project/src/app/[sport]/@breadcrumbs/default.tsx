@@ -3,7 +3,6 @@
 import { sports, event, tournament } from '@/api/routes'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import { Sport, Match, Tournament } from '@/model/Backend'
-import { toTitleCase } from '@/utils/stringUtils'
 import { Box } from '@kuma-ui/core'
 import { useParams, useSearchParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
@@ -14,7 +13,7 @@ export default function MatchDetailsPage() {
 
   const params = useParams()
   const searchParams = useSearchParams()
-  const eventId = searchParams.get('event')
+  const eventId = (params.eventId as string) || searchParams.get('event')
 
   const { data: sportsData } = useSWRImmutable<Sport[]>(sports())
   const { data: tournamentData } = useSWRImmutable<Tournament>(
