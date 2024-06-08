@@ -21,7 +21,7 @@ export default function TournamentDetailsNavigation({ tournament }: TournamentDe
   return (
     <>
       <Flex height="48px" paddingX="spacings.lg">
-        <Box as={Link} href={'matches'} paddingTop="spacings.lg" paddingX="spacings.sm">
+        <Box as={Link} href={'matches'} paddingTop="spacings.lg" paddingX="spacings.sm" textAlign="center" flexGrow={[1, 0, 0, 0]}>
           <Text
             color={selected === 'matches' ? 'colors.primary' : 'colors.onSurface.nLv2'}
             fontSize="fontSizes.sm"
@@ -40,7 +40,7 @@ export default function TournamentDetailsNavigation({ tournament }: TournamentDe
             />
           )}
         </Box>
-        <Box as={Link} href={'standings'} paddingTop="spacings.lg" paddingX="spacings.sm">
+        <Box as={Link} href={'standings'} paddingTop="spacings.lg" paddingX="spacings.sm" textAlign="center" flexGrow={[1, 0, 0, 0]}>
           <Text
             color={selected === 'standings' ? 'colors.primary' : 'colors.onSurface.nLv2'}
             fontSize="fontSizes.sm"

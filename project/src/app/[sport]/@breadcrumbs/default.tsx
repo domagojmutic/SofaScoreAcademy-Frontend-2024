@@ -42,7 +42,7 @@ export default function MatchDetailsPage() {
 
   return (
     <>
-      <Box paddingX="spacings.lg">
+      <Box display={['none', 'none', 'block', 'block']} paddingX="spacings.lg">
         <Breadcrumbs items={localItems} />
       </Box>
     </>

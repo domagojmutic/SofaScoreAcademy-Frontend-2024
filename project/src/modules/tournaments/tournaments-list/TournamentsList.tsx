@@ -11,7 +11,7 @@ interface TournamentListProps {
 
 export default function TournamentsList({ tournaments, params }: TournamentListProps) {
   return (
-    <Card>
+    <Card borderRadius={[0, 0, 16, 16]}>
       <Box paddingY="spacings.lg">
         <Box paddingX="spacings.lg" paddingY="10px">
           <Text as="h1" color="colors.onSurface.nLv1" fontWeight="bold" fontSize="fontSizes.lg" lineHeight="28px">
@@ -28,8 +28,18 @@ export default function TournamentsList({ tournaments, params }: TournamentListP
             return <TournamentsListItemSkeleton key={i} />
           })}
 
-        <Box paddingX="spacings.lg" marginTop="spacings.xl">
-          <Text as="span" color="colors.primary" fontWeight="bold" fontSize="fontSizes.md" lineHeight="24px">
+        <Box paddingX="spacings.lg" marginTop="spacings.xl" textAlign={['center', 'left', 'left', 'left']}>
+          <Text
+            as="span"
+            color="colors.primary"
+            fontWeight="bold"
+            fontSize="fontSizes.md"
+            lineHeight="24px"
+            border={['2px solid', 'none', 'none', 'none']}
+            borderColor={'colors.primary'}
+            paddingX="spacings.lg"
+            paddingY="spacings.sm"
+          >
             View More
           </Text>
         </Box>

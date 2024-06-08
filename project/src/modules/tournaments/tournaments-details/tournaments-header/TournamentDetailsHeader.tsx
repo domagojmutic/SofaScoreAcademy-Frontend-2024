@@ -6,6 +6,7 @@ import Separator from '@/components/Separator'
 import Link from 'next/link'
 import TournamentsDetailsTop from './components/TournamentsDetailsTop'
 import TournamentsDetailsNavigation from './components/TournamentsDetailsNavigation'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 interface TournamentDetailsHeaderProps {
   tournament: Tournament
@@ -14,7 +15,12 @@ interface TournamentDetailsHeaderProps {
 export default function TournamentDetailsHeader({ tournament }: TournamentDetailsHeaderProps) {
   return (
     <>
-      <Card>
+      <Card borderRadius={[0, 0, 16, 16]} zIndex="1" position="relative">
+        <Breadcrumbs
+          display={['flex', 'flex', 'none', 'none']}
+          items={[tournament.sport.name, tournament.name]}
+          paddingX={'spacings.lg'}
+        />
         <TournamentsDetailsTop tournament={tournament} />
         <TournamentsDetailsNavigation tournament={tournament} />
       </Card>

@@ -3,6 +3,8 @@ import { Match } from '@/model/Backend'
 import Link from 'next/link'
 import MatchesTeam from './components/MatchesTeam'
 import Separator from '@/components/Separator'
+import theme from '../../../../../../kuma.config'
+import { useScreenContext } from '@/context/ScreenContext'
 
 interface MatchesListItemProps {
   match: Match
@@ -10,10 +12,15 @@ interface MatchesListItemProps {
 }
 
 export default function MatchesListItem({ match, selected }: MatchesListItemProps) {
+  const screen = useScreenContext()
   return (
     <Flex
       as={Link}
-      href={'?event=' + match.id}
+      href={
+        screen.screenWidth >= parseInt(theme.breakpoints['breakpoints.md'])
+          ? '?event=' + match.id
+          : '/' + match.tournament.sport.slug + '/event/' + match.id
+      }
       paddingY="spacings.sm"
       display="flex"
       alignItems="center"

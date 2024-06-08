@@ -41,7 +41,7 @@ export default function TournamentStandings({ tournamentStandingsServer }: Tourn
 
   return (
     <>
-      <Card paddingBottom="spacings.lg" position="relative">
+      <Card paddingBottom="spacings.lg" position="relative" borderRadius={[0, 0, 16, 16]}>
         {((tournamentStandingsServer && isLoading) || isValidating) && (
           <Flex position="absolute" width="100%" height="48px" justifyContent="center" alignItems="center">
             <LoadingSpinner size="24px" />

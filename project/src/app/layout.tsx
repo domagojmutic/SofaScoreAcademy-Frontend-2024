@@ -7,6 +7,7 @@ import Header from '@/modules/header/Header'
 import { Flex, Box, Spacer } from '@kuma-ui/core'
 import { KumaRegistry } from '@kuma-ui/next-plugin/registry'
 import { Metadata } from 'next'
+import { ScreenContextProvider } from '@/context/ScreenContext'
 
 export const metadata: Metadata = {
   icons: '/favicon.ico',
@@ -20,22 +21,24 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <KumaRegistry>
         <ThemeContextProvider>
           <SWRProvider>
-            <body>
-              <Flex
-                as="div"
-                bg="colors.surface.s0"
-                minHeight="100vh"
-                flexDirection="column"
-                justifyContent="space-between"
-              >
-                <Header sports={navigation} />
-                <Box as="main" flexGrow="1">
-                  {children}
-                </Box>
-                <Spacer size="48px" />
-                <Footer />
-              </Flex>
-            </body>
+            <ScreenContextProvider>
+              <body>
+                <Flex
+                  as="div"
+                  bg="colors.surface.s0"
+                  minHeight="100vh"
+                  flexDirection="column"
+                  justifyContent="space-between"
+                >
+                  <Header sports={navigation} />
+                  <Box as="main" flexGrow="1">
+                    {children}
+                  </Box>
+                  <Spacer display={['none', 'none', 'block', 'block']} size="48px" />
+                  <Footer />
+                </Flex>
+              </body>
+            </ScreenContextProvider>
           </SWRProvider>
         </ThemeContextProvider>
       </KumaRegistry>

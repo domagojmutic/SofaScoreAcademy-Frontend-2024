@@ -20,7 +20,7 @@ export default function MatchesDetailsCloseHeader({ matchId }: MatchDetailsClose
         </Button>
         <Flex
           as={Link}
-          href={'/' + params.sport + '/events/' + matchId}
+          href={'/' + params.sport + '/event/' + matchId}
           justifyContent="center"
           alignItems="center"
           flexDirection="row"

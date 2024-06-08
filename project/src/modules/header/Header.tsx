@@ -4,7 +4,7 @@ import TopHeader from './components/TopHeader'
 import { Sport } from '@/model/Backend'
 
 interface HeaderProps {
-  sports: Sport[]
+  sports: Sport[],
 }
 
 export default function Header(props: HeaderProps) {

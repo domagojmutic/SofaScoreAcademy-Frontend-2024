@@ -28,7 +28,13 @@ export default function MatchesPagesHeader({ nextPage, prevPage }: MatchesTimeHe
       >
         <Image src="/ic_chevron_right.svg" transform="rotate(180deg)" />
       </Button>
-      <Text textAlign="center" fontSize="fontSizes.md" fontWeight="bold" lineHeight="20px">
+      <Text
+        textAlign="center"
+        fontSize="fontSizes.md"
+        fontWeight="bold"
+        lineHeight="20px"
+        display={['none', 'none', 'block', 'block']}
+      >
         Matches
       </Text>
       <Button

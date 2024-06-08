@@ -9,11 +9,16 @@ interface TournamentDetailsTopProps {
 export default function TournamentDetailsTop({ tournament }: TournamentDetailsTopProps) {
   return (
     <>
-      <Flex height="112px" padding="spacings.lg" gap="spacings.xxl">
+      <Flex
+        height={['64px', '64px', '112px', '112px']}
+        paddingX="spacings.lg"
+        paddingY={[4, 4, 16, 16]}
+        gap="spacings.xxl"
+      >
         <Box
-          width="80px"
-          height="80px"
-          padding="spacings.md"
+          width={['56px', '56px', '80px', '80px']}
+          height={['56px', '56px', '80px', '80px']}
+          padding={['spacings.sm', 'spacings.sm', 'spacings.md', 'spacings.md']}
           borderColor="colors.onSurface.nLv3"
           borderWidth="1px"
           borderStyle="solid"
@@ -21,8 +26,8 @@ export default function TournamentDetailsTop({ tournament }: TournamentDetailsTo
         >
           <Image src={`/api/tournament/${tournament.id}/image`} width="100%" />
         </Box>
-        <Box padding="10px">
-          <Text as="h1" fontSize="32px" fontWeight="bold" color="colors.onSurface.nLv1">
+        <Box padding={["4px", "4px", "spacings.sm", "spacings.sm"]}>
+          <Text as="h1" fontSize={['20px', '20px', '32px', '32px']} fontWeight="bold" color="colors.onSurface.nLv1">
             {tournament.name}
           </Text>
           <Flex gap="4px" alignItems="center">

@@ -29,8 +29,9 @@ const theme = createTheme({
     xxl: '24px',
   },
   breakpoints: {
-    sm: '400px',
-    md: '700px',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
   },
   fontWeights: {
     light: 300,

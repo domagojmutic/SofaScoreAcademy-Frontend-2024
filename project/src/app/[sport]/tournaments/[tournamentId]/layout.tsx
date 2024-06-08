@@ -14,7 +14,7 @@ export default async function TournamentsLayout({
     <>
       <Box gridColumn="span 2">
         <TournamentDetailsHeader tournament={tournamentData} />
-        <Spacer size="spacings.md" />
+        <Spacer display={["none", "none", "block", "block"]} size="spacings.md" />
         {children}
       </Box>
     </>

@@ -1,65 +1,36 @@
 'use client'
 import { Match, Tournament } from '@/model/Backend'
-import useSWR from 'swr'
 import Card from '@/components/Card'
 import MatchesTimeHeader from './matches-list/components/matches-time-header/MatchesTimeHeader'
 import MatchesList from './matches-list/MatchesList'
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment } from 'react'
 import MatchesTournamentHeader from './matches-list/components/MatchesTournamentHeader'
 import Separator from '@/components/Separator'
-import { events } from '@/api/routes'
 import MatchesTournamentHeaderSkeleton from './matches-list/components/MatchesTournamentHeaderSkeleton'
-import { addToDate, isSameDay } from '@/utils/dateUtils'
 import { Box, Flex, Text } from '@kuma-ui/core'
 import LoadingSpinner from '@/components/LoadingSpinner'
 
 interface MatchListProps {
-  sport: string
+  nextDate: () => void
+  prevDate: () => void
+  isLoading: boolean
+  isValidating: boolean
+  matches: Match[]
+  matchesByLeague: { tournament: Tournament; matches: Match[] }[]
   date: Date
-  matchesServer?: Match[]
+  localDate: Date
 }
 
-export default function MatchesCalendarList({ sport, date, matchesServer }: MatchListProps) {
-  const [matchesByLeague, setMatchesByLeague] = useState<{ tournament: Tournament; matches: Match[] }[]>([])
-  const [localDate, setLocalDate] = useState<Date>(new Date(date))
-
-  const nextDate = () => {
-    setLocalDate(addToDate(localDate, { days: 1 }))
-  }
-  const prevDate = () => {
-    setLocalDate(addToDate(localDate, { days: -1 }))
-  }
-
-  const {
-    data: matches,
-    error,
-    isLoading,
-    isValidating,
-    mutate,
-  } = useSWR<Match[]>(events(sport, localDate), {
-    fallbackData: isSameDay(localDate, date) ? matchesServer : undefined,
-    suspense: true,
-  })
-
-  useEffect(() => {
-    mutate()
-  }, [localDate])
-
-  useEffect(() => {
-    const tournamentIds: number[] = []
-    const tournaments: { tournament: Tournament; matches: Match[] }[] = []
-    matches?.forEach(match => {
-      if (tournamentIds.includes(match.tournament.id)) {
-        const obj = tournaments.find(tournament => tournament.tournament.id === match.tournament.id)
-        obj?.matches.push(match)
-      } else {
-        tournamentIds.push(match.tournament.id)
-        tournaments.push({ tournament: match.tournament, matches: [match] })
-      }
-    })
-    setMatchesByLeague(tournaments)
-  }, [matches])
-
+export default function MatchesCalendarList({
+  nextDate,
+  prevDate,
+  isLoading,
+  isValidating,
+  matches,
+  matchesByLeague,
+  date,
+  localDate,
+}: MatchListProps) {
   return (
     <>
       <Card overflow="hidden" paddingBottom="spacings.lg" position="relative">
@@ -103,6 +74,7 @@ export default function MatchesCalendarList({ sport, date, matchesServer }: Matc
           </Box>
         )}
         {!isLoading &&
+          matchesByLeague &&
           matchesByLeague.map(({ tournament, matches }, index) => {
             return (
               <Fragment key={tournament.id}>

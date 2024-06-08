@@ -14,7 +14,7 @@ export default async function TournamentsLayout({
   const tournamentData = await (await fetch(tournament(params.tournamentId))).json()
   return (
     <>
-      <Grid gridTemplateColumns="repeat(2, 1fr)" gap="spacings.xxl">
+      <Grid gridTemplateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)']} gap="spacings.xxl">
         <Box>{matchesList}</Box>
         <Box>{matchDetails}</Box>
       </Grid>

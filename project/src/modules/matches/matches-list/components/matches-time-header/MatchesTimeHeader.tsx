@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Image } from '@kuma-ui/core'
+import { Button, Flex, Image } from '@kuma-ui/core'
 import { addToDate } from '@/utils/dateUtils'
 import MatchesTimeSlot from './components/MatchesTimeSlot'
 import { useState } from 'react'

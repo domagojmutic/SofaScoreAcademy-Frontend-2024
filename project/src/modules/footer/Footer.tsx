@@ -3,7 +3,7 @@ import NextLink from 'next/link'
 
 export default function Footer() {
   return (
-    <Box as="footer" boxShadow="0 2px 16px 0 rgba(0, 0, 0, 0.12)">
+    <Box as="footer" boxShadow="0 2px 16px 0 rgba(0, 0, 0, 0.12)" zIndex="5">
       <Flex
         h="116px"
         w="100%"

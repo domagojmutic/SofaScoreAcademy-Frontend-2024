@@ -1,66 +1,29 @@
 'use client'
-import { Match, Tournament } from '@/model/Backend'
-import useSWR from 'swr'
+import { Match } from '@/model/Backend'
 import Card from '@/components/Card'
-import MatchesTimeHeader from './matches-list/components/matches-time-header/MatchesTimeHeader'
 import MatchesList from './matches-list/MatchesList'
-import { Fragment, useEffect, useState } from 'react'
-import MatchesTournamentHeader from './matches-list/components/MatchesTournamentHeader'
-import Separator from '@/components/Separator'
-import { events, tournamentEvents } from '@/api/routes'
-import MatchesTournamentHeaderSkeleton from './matches-list/components/MatchesTournamentHeaderSkeleton'
+import { Fragment } from 'react'
 import { Box, Flex, Text } from '@kuma-ui/core'
 import LoadingSpinner from '@/components/LoadingSpinner'
-import { useParams } from 'next/navigation'
 import MatchesPagesHeader from './matches-list/components/MatchesPagesHeader'
 
-interface MatchListProps {}
+interface MatchListProps {
+  nextPage: () => void
+  prevPage: () => void
+  isLoading: boolean
+  isValidating: boolean
+  matches: Match[]
+  matchesByRounds: { round: number; matches: Match[] }[]
+}
 
-export default function MatchesCalendarList({}: MatchListProps) {
-  const [matchesByRounds, setMatchesByRounds] = useState<{ round: number; matches: Match[] }[]>([])
-  const [localPage, setLocalPage] = useState<number>(0)
-  const [span, setSpan] = useState<'next' | 'last'>('next')
-
-  const params = useParams()
-
-  const nextPage = () => {
-    if (span === 'last' && localPage === 0) return setSpan('next')
-    if (span === 'last') return setLocalPage(old => old - 1)
-    if (span === 'next') setLocalPage(old => old + 1)
-  }
-  const prevPage = () => {
-    if (span === 'next' && localPage === 0) return setSpan('last')
-    if (span === 'last') return setLocalPage(old => old + 1)
-    if (span === 'next') setLocalPage(old => old - 1)
-  }
-
-  const {
-    data: matches,
-    error,
-    isLoading,
-    isValidating,
-    mutate,
-  } = useSWR<Match[]>(tournamentEvents(params.tournamentId as string, span, localPage))
-
-  useEffect(() => {
-    mutate()
-  }, [localPage, span])
-
-  useEffect(() => {
-    const rounds: number[] = []
-    const tournaments: { round: number; matches: Match[] }[] = []
-    matches?.forEach(match => {
-      if (rounds.includes(match.round)) {
-        const obj = tournaments.find(tournament => tournament.round === match.round)
-        obj?.matches.push(match)
-      } else {
-        rounds.push(match.round)
-        tournaments.push({ round: match.round, matches: [match] })
-      }
-    })
-    setMatchesByRounds(tournaments)
-  }, [matches])
-
+export default function MatchesCalendarList({
+  nextPage,
+  prevPage,
+  isLoading,
+  isValidating,
+  matches,
+  matchesByRounds,
+}: MatchListProps) {
   return (
     <>
       <Card overflow="hidden" paddingTop="spacings.md" paddingBottom="spacings.lg" position="relative">
@@ -81,6 +44,7 @@ export default function MatchesCalendarList({}: MatchListProps) {
         )}
 
         {!isLoading &&
+          matchesByRounds &&
           matchesByRounds.map(({ round, matches }, index) => {
             return (
               <Fragment key={round}>
