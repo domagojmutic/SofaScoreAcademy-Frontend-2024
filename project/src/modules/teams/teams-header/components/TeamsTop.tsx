@@ -1,13 +1,13 @@
 import { Box, Flex, Text, Image } from '@kuma-ui/core'
-import { Tournament } from '@/model/Backend'
+import { Team } from '@/model/Backend'
 import iso3311a2 from 'iso-3166-1-alpha-2'
 import { getStandardCountryName } from '@/utils/country'
 
-interface TournamentDetailsTopProps {
-  tournament: Tournament
+interface TeamDetailsTopProps {
+  team: Team
 }
 
-export default function TournamentDetailsTop({ tournament }: TournamentDetailsTopProps) {
+export default function TeamDetailsTop({ team }: TeamDetailsTopProps) {
   return (
     <>
       <Flex
@@ -25,16 +25,16 @@ export default function TournamentDetailsTop({ tournament }: TournamentDetailsTo
           borderStyle="solid"
           borderRadius="4px"
         >
-          <Image src={`/api/tournament/${tournament.id}/image`} width="100%" />
+          <Image src={`/api/team/${team.id}/image`} width="100%" />
         </Box>
         <Box padding={['4px', '4px', 'spacings.sm', 'spacings.sm']}>
           <Text as="h1" fontSize={['20px', '20px', '32px', '32px']} fontWeight="bold" color="colors.onSurface.nLv1">
-            {tournament.name}
+            {team.name}
           </Text>
           <Flex gap="4px" alignItems="center">
             <Image
               src={`https://www.sofascore.com/static/images/flags/${iso3311a2
-                .getCode(getStandardCountryName(tournament.country.name))
+                .getCode(getStandardCountryName(team.country.name))
                 ?.toLowerCase()}.png`}
               width="16px"
               height="16px"
@@ -44,7 +44,7 @@ export default function TournamentDetailsTop({ tournament }: TournamentDetailsTo
               borderStyle="solid"
             />
             <Text as="h3" fontSize="fontSizes.sm" fontWeight="bold" color="colors.onSurface.nLv1">
-              {tournament.country.name}
+              {team.country.name}
             </Text>
           </Flex>
         </Box>

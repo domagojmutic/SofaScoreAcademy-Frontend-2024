@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Flex } from '@kuma-ui/core'
+import { Box, Flex, css } from '@kuma-ui/core'
 import { Standings } from '@/model/Backend'
 import Card from '@/components/Card'
 import TournamentStandingsHeader from './components/TournamentStandingsHeader'
@@ -11,26 +11,39 @@ import useSWR from 'swr'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import { useEffect, useState } from 'react'
 import TournamentStandingsRowSkeleton from './components/TournamentStandingsRowSkeleton'
+import TournamentStandingsPicker from './components/TournamentStandingsPicker'
 
 interface TournamentStandingsProps {
   tournamentStandingsServer?: Standings[]
+  forceTournamentId?: string | number
+  allowTournamentChanging?: boolean
 }
 
-export default function TournamentStandings({ tournamentStandingsServer }: TournamentStandingsProps) {
+export default function TournamentStandings({
+  tournamentStandingsServer,
+  forceTournamentId,
+  allowTournamentChanging = false,
+}: TournamentStandingsProps) {
   const params = useParams()
   const fields = standingsFields[params.sport as string]
   const [tournamentStandingsTotal, setTournamentStandingsTotal] = useState<Standings | undefined>(
     tournamentStandingsServer?.find(standings => standings.type === 'total')
   )
+  const [tournamentLocalId, setTournamentLocalId] = useState(forceTournamentId || (params.tournamentId as string))
+
   const {
     data: tournamentStandingsAll,
     error,
     isLoading,
     isValidating,
     mutate,
-  } = useSWR<Standings[]>(tournamentStandings(params.tournamentId as string), {
+  } = useSWR<Standings[]>(tournamentStandings(tournamentLocalId), {
     fallbackData: tournamentStandingsServer,
   })
+
+  useEffect(() => {
+    mutate()
+  }, [tournamentLocalId])
 
   useEffect(() => {
     if (tournamentStandingsAll)
@@ -45,12 +58,35 @@ export default function TournamentStandings({ tournamentStandingsServer }: Tourn
             <LoadingSpinner size="24px" />
           </Flex>
         )}
-        <Box as="table" width="100%">
+        {allowTournamentChanging && (
+          <Box paddingX="spacings.sm" paddingTop="spacings.sm">
+            <Card padding="spacings.sm" bg="colors.surface.s2" borderRadius="8px" height="56px" boxShadow="none">
+              <TournamentStandingsPicker selectedTournamentId={tournamentLocalId} />
+            </Card>
+          </Box>
+        )}
+
+        <Box
+          as="table"
+          width="100%"
+          borderStyle="none"
+          className={css`
+            border-collapse: collapse;
+          `}
+        >
           <TournamentStandingsHeader fields={fields} />
           <tbody>
             {tournamentStandingsTotal &&
               tournamentStandingsTotal.sortedStandingsRows.map((row, i) => {
-                return <TournamentStandingsRow fields={fields} standingsRow={row} index={i + 1} key={row.id} />
+                return (
+                  <TournamentStandingsRow
+                    fields={fields}
+                    standingsRow={row}
+                    index={i + 1}
+                    selected={`${row.team.id}` === params.teamId}
+                    key={row.id}
+                  />
+                )
               })}
 
             {!tournamentStandingsServer &&
@@ -137,7 +173,7 @@ const standingsFields: {
     {
       name: 'DIFF',
       value: (obj: Standings['sortedStandingsRows'][0]) => {
-        return obj.scoresAgainst - obj.scoresFor 
+        return obj.scoresAgainst - obj.scoresFor
       },
     },
     {

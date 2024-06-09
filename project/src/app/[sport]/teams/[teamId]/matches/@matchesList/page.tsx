@@ -11,13 +11,13 @@ export default async function MatchesPage({ params }: { params: { sport: string 
   return (
     <>
       <Box display={['none', 'none', 'block', 'block']}>
-        <MatchesTournamentListLogic listType="tournaments">
+        <MatchesTournamentListLogic listType="teams">
           {/* @ts-ignore */}
           <MatchesTournamentList />
         </MatchesTournamentListLogic>
       </Box>
       <Box display={['block', 'block', 'none', 'none']}>
-        <MatchesTournamentListLogic listType="tournaments">
+        <MatchesTournamentListLogic listType="teams">
           {/* @ts-ignore */}
           <MatchesTournamentListMobile />
         </MatchesTournamentListLogic>

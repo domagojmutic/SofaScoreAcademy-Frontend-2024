@@ -2,13 +2,15 @@
 import { Match } from '@/model/Backend'
 import useSWR from 'swr'
 import { ReactNode, useEffect, useState } from 'react'
-import { tournamentEvents } from '@/api/routes'
+import { teamEvents, tournamentEvents } from '@/api/routes'
 import { useParams } from 'next/navigation'
 import React from 'react'
 
-interface MatchListLogicProps {}
+interface MatchListLogicProps {
+  listType: 'tournaments' | 'teams'
+}
 
-export default function MatchesCalendarList({ children }: MatchListLogicProps & { children: ReactNode }) {
+export default function MatchesCalendarList({ children, listType }: MatchListLogicProps & { children: ReactNode }) {
   const [matchesByRounds, setMatchesByRounds] = useState<{ round: number; matches: Match[] }[]>([])
   const [localPage, setLocalPage] = useState<number>(0)
   const [span, setSpan] = useState<'next' | 'last'>('next')
@@ -26,13 +28,17 @@ export default function MatchesCalendarList({ children }: MatchListLogicProps & 
     if (span === 'next') setLocalPage(old => old - 1)
   }
 
-  const {
-    data: matches,
-    error,
-    isLoading,
-    isValidating,
-    mutate,
-  } = useSWR<Match[]>(tournamentEvents(params.tournamentId as string, span, localPage))
+  let eventsUrl = null
+  switch (listType) {
+    case 'teams':
+      eventsUrl = teamEvents(params.teamId as string, span, localPage)
+      break
+    case 'tournaments':
+      eventsUrl = tournamentEvents(params.tournamentId as string, span, localPage)
+      break
+  }
+
+  const { data: matches, error, isLoading, isValidating, mutate } = useSWR<Match[]>(eventsUrl)
 
   useEffect(() => {
     mutate()

@@ -2,6 +2,7 @@
 import { Match } from '@/model/Backend'
 import { getDateString, getTimeString } from '@/utils/dateUtils'
 import { Box, Flex, Image, Text } from '@kuma-ui/core'
+import Link from 'next/link'
 
 interface MatchDetailsTotalProps {
   match: Match
@@ -11,7 +12,14 @@ export default function MatchesDetailsTotal({ match }: MatchDetailsTotalProps) {
   return (
     <>
       <Flex height="112px" padding="spacings.lg" alignItems="flex-start">
-        <Flex width="96px" flexDirection="column" gap="spacings.sm" alignItems="center">
+        <Flex
+          as={Link}
+          href={'/' + match.tournament.sport.slug + '/teams/' + match.homeTeam.id + '/details'}
+          width="96px"
+          flexDirection="column"
+          gap="spacings.sm"
+          alignItems="center"
+        >
           <Image src={`/api/team/${match.homeTeam.id}/image`} width="40px" height="40px" />
           <Text color="colors.onSurface.nLv1" fontSize="fontSizes.xs" fontWeight="bold" textAlign="center">
             {match.homeTeam.name}
@@ -81,7 +89,14 @@ export default function MatchesDetailsTotal({ match }: MatchDetailsTotalProps) {
             </Text>
           </Box>
         )}
-        <Flex width="96px" flexDirection="column" gap="spacings.sm" alignItems="center">
+        <Flex
+          as={Link}
+          href={'/' + match.tournament.sport.slug + '/teams/' + match.awayTeam.id + '/details'}
+          width="96px"
+          flexDirection="column"
+          gap="spacings.sm"
+          alignItems="center"
+        >
           <Image src={`/api/team/${match.awayTeam.id}/image`} width="40px" height="40px" />
           <Text color="colors.onSurface.nLv1" fontSize="fontSizes.xs" fontWeight="bold" textAlign="center">
             {match.awayTeam.name}

@@ -16,7 +16,7 @@ export default function TournamentsListItem({ tournament, params }: TournamentsL
       paddingY="spacings.sm"
       display="flex"
       alignItems="center"
-      _hover={{ bg: 'rgba(0,0,0,0.1)' }}
+      _hover={{ bg: 'colors.surface.s2' }}
     >
       <Image src={`/api/tournament/${tournament.id}/image`} alt={tournament.slug} width="40px" height="40px" />
       <Text

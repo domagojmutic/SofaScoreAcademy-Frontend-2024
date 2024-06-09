@@ -52,6 +52,7 @@ export default function TournamentStandingsHeader({ fields }: TournamentStanding
                 lineHeight="16px"
                 fontWeight="fontWeights.normal"
                 fontStretch="condensed"
+                key={field.name}
               >
                 {field.name}
               </Box>

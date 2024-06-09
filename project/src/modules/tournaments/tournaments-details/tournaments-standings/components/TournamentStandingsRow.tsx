@@ -15,9 +15,10 @@ interface TournamentStandingsRowProps {
         value: (obj: Standings['sortedStandingsRows'][0]) => string
       }
   )[]
+  selected: boolean
 }
 
-export default function TournamentStandingsRow({ index, standingsRow, fields }: TournamentStandingsRowProps) {
+export default function TournamentStandingsRow({ index, standingsRow, fields, selected }: TournamentStandingsRowProps) {
   const params = useParams()
   const router = useRouter()
 
@@ -27,14 +28,16 @@ export default function TournamentStandingsRow({ index, standingsRow, fields }: 
         as="tr"
         height="48px"
         cursor="pointer"
+        bg={selected ? 'colors.primaryHighlight' : 'colors.surface.s1'}
         onClick={() => {
-          router.push('/' + params.sport + '/teams/' + standingsRow.team.id)
+          router.push('/' + params.sport + '/teams/' + standingsRow.team.id + '/standings')
         }}
+        _hover={{bg: "colors.surface.s2"}}
       >
         <Box as="td" width="24px" paddingX="spacings.sm">
           <Flex
             as="span"
-            bg="colors.secondary"
+            bg={selected ? 'colors.surface.s1' : 'colors.secondary'}
             borderRadius="50%"
             width="24px"
             height="24px"
@@ -67,7 +70,7 @@ export default function TournamentStandingsRow({ index, standingsRow, fields }: 
         </Box>
         {fields.map(field => {
           return (
-            <Box as="td">
+            <Box as="td" key={field.name}>
               <Text
                 textAlign="center"
                 color="colors.onSurface.nLv1"

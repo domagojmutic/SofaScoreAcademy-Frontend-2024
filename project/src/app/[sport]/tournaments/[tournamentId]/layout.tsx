@@ -1,4 +1,5 @@
 import { tournament } from '@/api/routes'
+import { Tournament } from '@/model/Backend'
 import TournamentDetailsHeader from '@/modules/tournaments/tournaments-details/tournaments-header/TournamentDetailsHeader'
 import { Box, Spacer } from '@kuma-ui/core'
 
@@ -9,7 +10,7 @@ export default async function TournamentsLayout({
   children: React.ReactNode
   params: { sport: string; tournamentId: string }
 }) {
-  const tournamentData = await (await fetch(tournament(params.tournamentId))).json()
+  const tournamentData: Tournament = await (await fetch(tournament(params.tournamentId))).json()
   return (
     <>
       <Box gridColumn="span 2">

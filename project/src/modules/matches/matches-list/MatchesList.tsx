@@ -1,14 +1,16 @@
+'use client'
 import { Match } from '@/model/Backend'
 import MatchesListItem from './components/matches-item/MatchesItem'
 import MatchesListItemSkeleton from './components/matches-item/MatchesItemSkeleton'
 import { useSearchParams } from 'next/navigation'
 
 interface MatchListProps {
-  matches?: Match[],
+  matches?: Match[]
   details?: 'status' | 'time'
+  clickable?: boolean
 }
 
-export default function MatchesList({ matches, details }: MatchListProps) {
+export default function MatchesList({ matches, details, clickable = true }: MatchListProps) {
   const searchParams = useSearchParams()
   const eventId = searchParams.get('event')
 
@@ -20,7 +22,7 @@ export default function MatchesList({ matches, details }: MatchListProps) {
         })}
       {matches &&
         matches.map(match => {
-          return <MatchesListItem match={match} selected={eventId === `${match.id}`} details={details} key={match.id} />
+          return <MatchesListItem match={match} selected={eventId === `${match.id}`} details={details} clickable={clickable} key={match.id} />
         })}
     </>
   )

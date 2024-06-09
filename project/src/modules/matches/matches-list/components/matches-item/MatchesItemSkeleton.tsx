@@ -9,7 +9,6 @@ export default function MatchesListItemSkeleton() {
       paddingY="spacings.sm"
       display="flex"
       alignItems="center"
-      _hover={{ bg: 'rgba(0,0,0,0.1)' }}
     >
       <Box width="64px" height="56px" paddingX="4px" paddingY="10px">
         <Box height="16px" width="2em" bg="black" opacity="0.25" marginX="auto" />

@@ -1,8 +1,8 @@
 'use client'
 
-import { sports, event, tournament } from '@/api/routes'
+import { sports, event, tournament, team } from '@/api/routes'
 import Breadcrumbs from '@/components/Breadcrumbs'
-import { Sport, Match, Tournament } from '@/model/Backend'
+import { Sport, Match, Tournament, Team } from '@/model/Backend'
 import { Box } from '@kuma-ui/core'
 import { useParams, useSearchParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
@@ -19,6 +19,7 @@ export default function MatchDetailsPage() {
   const { data: tournamentData } = useSWRImmutable<Tournament>(
     params.tournamentId ? tournament(params.tournamentId as string) : null
   )
+  const { data: teamData } = useSWRImmutable<Team>(params.teamId ? team(params.teamId as string) : null)
   const {
     data: eventData,
     error,
@@ -35,9 +36,10 @@ export default function MatchDetailsPage() {
     if (eventId && eventData)
       temp.push(eventData.tournament.name, eventData.homeTeam.name + ' vs ' + eventData.awayTeam.name)
     else if (params.tournamentId && tournamentData) temp.push(tournamentData.name)
+    else if (params.teamId && teamData) temp.push(teamData.name)
 
     setLocalItems(temp)
-  }, [params, searchParams, sportsData, eventData, tournamentData])
+  }, [params, searchParams, sportsData, eventData, tournamentData, teamData])
 
   return (
     <>

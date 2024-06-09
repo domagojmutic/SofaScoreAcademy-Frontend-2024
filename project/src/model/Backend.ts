@@ -56,7 +56,7 @@ export interface Match {
 export interface Player {
   id: number
   name: string
-  slub: string
+  slug: string
   country: Country
   position: string
 }

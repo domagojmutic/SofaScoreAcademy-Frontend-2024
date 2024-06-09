@@ -11,23 +11,31 @@ interface MatchesListItemProps {
   match: Match
   selected: boolean
   details?: 'status' | 'time'
+  clickable?: boolean
 }
 
-export default function MatchesListItem({ match, selected, details = 'status' }: MatchesListItemProps) {
+export default function MatchesListItem({
+  match,
+  selected,
+  details = 'status',
+  clickable = true,
+}: MatchesListItemProps) {
   const screen = useScreenContext()
   return (
     <Flex
       as={Link}
       href={
-        screen.screenWidth >= parseInt(theme.breakpoints['breakpoints.md'])
-          ? '?event=' + match.id
-          : '/' + match.tournament.sport.slug + '/event/' + match.id
+        clickable
+          ? screen.screenWidth >= parseInt(theme.breakpoints['breakpoints.md'])
+            ? '?event=' + match.id
+            : '/' + match.tournament.sport.slug + '/event/' + match.id
+          : '#'
       }
       paddingY="spacings.sm"
       display="flex"
       alignItems="center"
       height="56px"
-      _hover={{ bg: 'rgba(0,0,0,0.1)' }}
+      _hover={{ bg: 'colors.surface.s2' }}
       scroll={false}
       bg={selected ? 'colors.primaryHighlight' : 'none'}
     >
