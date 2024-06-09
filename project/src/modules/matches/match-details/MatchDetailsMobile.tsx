@@ -49,10 +49,17 @@ export default function MatchesDetailsMobile({
         {closable && <MatchesDetailsCloseHeader matchId={matchId} />}
         {match && <MatchDetailsTotal match={match} />}
       </Card>
-      <Card overflow="hidden" paddingBottom="spacings.lg" marginTop="spacings.sm" marginX="spacings.sm" marginBottom="48px">
+      <Card
+        overflow="hidden"
+        paddingBottom="spacings.lg"
+        marginTop="spacings.sm"
+        marginX="spacings.sm"
+        marginBottom="48px"
+      >
         {isLoading && <MatchDetailsTotalSkeleton />}
         <MatchesIncidentList
           matchId={matchId}
+          match={match}
           sport={params.sport as string}
           matchIncidentsServer={matchIncidentServer}
         />

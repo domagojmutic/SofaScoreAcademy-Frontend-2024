@@ -1,7 +1,10 @@
-import { Flex, Image, Link } from '@kuma-ui/core'
-import NextLink from 'next/link'
+'use client'
+import { Box, Flex, Image } from '@kuma-ui/core'
+import Link from 'next/link'
+import { useParams } from 'next/navigation'
 
 export default function TopHeader() {
+  const params = useParams()
   return (
     <Flex
       h="64px"
@@ -11,13 +14,20 @@ export default function TopHeader() {
       bg="colors.primary"
       paddingX="spacings.lg"
     >
-      <Link as={NextLink} href="/">
+      <Box as={Link} href="/">
         <Image src="/sofascore_lockup.svg" alt="SofaScore" width="132px" height="20px" />
-      </Link>
-      <Flex width="24px" height="24px">
-        <Link as={NextLink} href="/settings" position="absolute" right="20px">
+      </Box>
+      <Flex position="absolute" right="20px" gap="spacings.xxl">
+        <Box
+          as={Link}
+          href={'/' + (params.sport ? params.sport : 'football') + '/tournaments'}
+          display={['block', 'block', 'block', 'none']}
+        >
+          <Image src="/ic_tournaments.svg" alt="" width="24px" height="24px" />
+        </Box>
+        <Box as={Link} href="/settings">
           <Image src="/ic_settings.svg" alt="" width="24px" height="24px" />
-        </Link>
+        </Box>
       </Flex>
     </Flex>
   )

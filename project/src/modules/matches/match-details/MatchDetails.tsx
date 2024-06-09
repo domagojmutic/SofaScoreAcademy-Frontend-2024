@@ -8,6 +8,7 @@ import MatchDetailsTotal from './components/MatchDetailsTotal'
 import MatchesIncidentList from './components/match-incidents/MatchIncidentsList'
 import { useParams } from 'next/navigation'
 import MatchDetailsTotalSkeleton from './components/MatchDetailsTotalSkeleton'
+import Separator from '@/components/Separator'
 
 interface MatchDetailsProps {
   matchId: string
@@ -32,8 +33,10 @@ export default function MatchesDetails({ matchId, closable, matchServer, matchIn
         {closable && <MatchesDetailsCloseHeader matchId={matchId} />}
         {match && <MatchDetailsTotal match={match} />}
         {isLoading && <MatchDetailsTotalSkeleton />}
+        <Separator direction="horizontal" color="colors.onSurface.nLv4" length="100%" thickness="1px" />
         <MatchesIncidentList
           matchId={matchId}
+          match={match}
           sport={params.sport as string}
           matchIncidentsServer={matchIncidentServer}
         />
