@@ -17,7 +17,7 @@ export default function MatchesNoIncidents({ tournament }: MatchesIncidentListPr
         </Flex>
         <Flex
           as={Link}
-          href={'/' + tournament?.sport.slug + '/tournaments/' + tournament?.id}
+          href={'/' + tournament?.sport.slug + '/tournaments/' + tournament?.id + '/matches'}
           marginTop="spacings.lg"
           marginBottom={['spacings.lg', 'spacings.lg', '32px', '32px']}
         >

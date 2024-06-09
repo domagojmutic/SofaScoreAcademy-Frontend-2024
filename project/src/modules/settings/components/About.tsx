@@ -1,13 +1,9 @@
-'use client'
 import Separator from '@/components/Separator'
-import { useThemeContext } from '@/context/ThemeContext'
 import { Image, Text } from '@kuma-ui/core'
 import { Box, Flex } from '@kuma-ui/core'
 import Link from 'next/link'
 
-export default function ThemeSelector() {
-  const { isDark, setIsDark } = useThemeContext()
-
+export default function About() {
   return (
     <Flex
       flexDirection="column"

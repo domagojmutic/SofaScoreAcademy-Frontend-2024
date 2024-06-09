@@ -34,6 +34,10 @@ export default function AmericanFootballGoalIncident({ incident }: AmericanFootb
       imgSource = '/icons-incident/ic_touchdown.svg'
       imgTitle = 'Touchdown'
       break
+    case 'safety':
+      imgSource = '/icons-incident/ic_rogue.svg'
+      imgTitle = 'Safety'
+      break
     default:
       imgSource = '/icons-incident/ic_ball_football.svg'
       imgTitle = incident.goalType

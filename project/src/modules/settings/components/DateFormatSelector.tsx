@@ -2,7 +2,7 @@
 import { Text } from '@kuma-ui/core'
 import { Box, Flex } from '@kuma-ui/core'
 
-export default function ThemeSelector() {
+export default function DateFormatSelector() {
 
   return (
     <Box position="relative" width="100%" borderRadius="8px" bg="colors.surface.s2" padding="spacings.lg">

@@ -12,16 +12,23 @@ interface TournamentDetailsNavigationProps {
 
 export default function TournamentDetailsNavigation({ tournament }: TournamentDetailsNavigationProps) {
   const path = usePathname()
-  const [selected, setSelected] = useState('matches')
+  const [selected, setSelected] = useState<'matches' | 'standings'>()
 
   useEffect(() => {
     if (path.endsWith('standings')) setSelected('standings')
-    else setSelected('matches')
+    else if (path.endsWith('matches')) setSelected('matches')
   }, [path])
   return (
     <>
       <Flex height="48px" paddingX="spacings.lg">
-        <Box as={Link} href={'matches'} paddingTop="spacings.lg" paddingX="spacings.sm" textAlign="center" flexGrow={[1, 0, 0, 0]}>
+        <Box
+          as={Link}
+          href={'/' + tournament.sport.slug + '/tournaments/' + tournament.id + '/matches'}
+          paddingTop="spacings.lg"
+          paddingX="spacings.sm"
+          textAlign="center"
+          flexGrow={[1, 0, 0, 0]}
+        >
           <Text
             color={selected === 'matches' ? 'colors.primary' : 'colors.onSurface.nLv2'}
             fontSize="fontSizes.sm"
@@ -40,7 +47,14 @@ export default function TournamentDetailsNavigation({ tournament }: TournamentDe
             />
           )}
         </Box>
-        <Box as={Link} href={'standings'} paddingTop="spacings.lg" paddingX="spacings.sm" textAlign="center" flexGrow={[1, 0, 0, 0]}>
+        <Box
+          as={Link}
+          href={'/' + tournament.sport.slug + '/tournaments/' + tournament.id + '/standings'}
+          paddingTop="spacings.lg"
+          paddingX="spacings.sm"
+          textAlign="center"
+          flexGrow={[1, 0, 0, 0]}
+        >
           <Text
             color={selected === 'standings' ? 'colors.primary' : 'colors.onSurface.nLv2'}
             fontSize="fontSizes.sm"
