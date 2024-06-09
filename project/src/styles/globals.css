@@ -22,8 +22,8 @@
 }
 
 .dark {
-    --surface-s1: #101114;
-    --surface-s2: #21242d;
+    --surface-s0: #101114;
+    --surface-s1: #21242d;
     --surface-s2: rgba(0, 0, 0, 0.4);
     --primary-default: #849afd;
     --primary-variant: #afbeff;

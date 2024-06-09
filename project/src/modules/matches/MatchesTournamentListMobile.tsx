@@ -26,61 +26,61 @@ export default function MatchesCalendarList({
 }: MatchListMobileProps) {
   return (
     <>
-    <Box marginTop="spacings.lg">
-      <MatchesPagesHeader nextPage={nextPage} prevPage={prevPage} />
-      {!isLoading && isValidating && (
-        <>
-          <Box position="absolute" left="50%" transform="translateX(-50%)" paddingTop="spacings.sm">
-            <LoadingSpinner size="40px" />
-          </Box>
-          {(!matches || matches!.length <= 0) && (
-            <Box paddingTop="spacings.md">
-              <Text color="colors.onSurface.nLv1" fontWeight="bold">
-                &nbsp;
-              </Text>
+      <Box marginTop="spacings.lg">
+        {!isLoading && isValidating && (
+          <>
+            <Box position="absolute" left="50%" transform="translateX(-50%)" paddingTop="spacings.sm">
+              <LoadingSpinner size="40px" />
             </Box>
-          )}
-        </>
-      )}
-
-      {!isLoading &&
-        matchesByRounds.map(({ round, matches }, index) => {
-          return (
-            <Fragment key={round}>
-              <Box paddingX="spacings.lg" paddingY="spacings.sm" paddingTop={index !== 0 ? 'spacings.xxl' : ''}>
-                <Text
-                  fontSize="fontSizes.xs"
-                  fontWeight="bold"
-                  lineHeight="16px"
-                  color="colors.onSurface.nLv1"
-                  textAlign="left"
-                >
-                  Round {round}
+            {(!matches || matches!.length <= 0) && (
+              <Box paddingTop="spacings.md">
+                <Text color="colors.onSurface.nLv1" fontWeight="bold">
+                  &nbsp;
                 </Text>
               </Box>
-              <Card marginX="spacings.sm">
-                <MatchesList matches={matches} details='time' />
-              </Card>
-            </Fragment>
-          )
-        })}
+            )}
+          </>
+        )}
 
-      {(isLoading || (matches && matches.length > 0 && matchesByRounds.length <= 0)) && (
-        <>
-          <Box marginX="spacings.lg" marginY="spacings.sm" width="3em" height="14px" bg="black" opacity="0.25" />
-          <MatchesList />
-        </>
-      )}
+        <MatchesPagesHeader nextPage={nextPage} prevPage={prevPage} />
+        {!isLoading &&
+          matchesByRounds.map(({ round, matches }, index) => {
+            return (
+              <Fragment key={round}>
+                <Box paddingX="spacings.lg" paddingY="spacings.sm" paddingTop={index !== 0 ? 'spacings.xxl' : ''}>
+                  <Text
+                    fontSize="fontSizes.xs"
+                    fontWeight="bold"
+                    lineHeight="16px"
+                    color="colors.onSurface.nLv1"
+                    textAlign="left"
+                  >
+                    Round {round}
+                  </Text>
+                </Box>
+                <Card marginX="spacings.sm">
+                  <MatchesList matches={matches} details="time" />
+                </Card>
+              </Fragment>
+            )
+          })}
 
-      {!isLoading && !isValidating && matches && matches.length <= 0 && (
-        <Flex justify="center" alignItems="center" paddingTop="spacings.md">
-          <Text color="colors.onSurface.nLv1" fontWeight="bold">
-            No Events
-          </Text>
-        </Flex>
-      )}
-      <Spacer size="16px" />
-      <MatchesPagesHeader nextPage={nextPage} prevPage={prevPage} />
+        {(isLoading || (matches && matches.length > 0 && matchesByRounds.length <= 0)) && (
+          <>
+            <Box marginX="spacings.lg" marginY="spacings.sm" width="3em" height="14px" bg="black" opacity="0.25" />
+            <MatchesList />
+          </>
+        )}
+
+        {!isLoading && !isValidating && matches && matches.length <= 0 && (
+          <Flex justify="center" alignItems="center" paddingTop="spacings.md">
+            <Text color="colors.onSurface.nLv1" fontWeight="bold">
+              No Events
+            </Text>
+          </Flex>
+        )}
+        <Spacer size="16px" />
+        <MatchesPagesHeader nextPage={nextPage} prevPage={prevPage} />
       </Box>
     </>
   )
