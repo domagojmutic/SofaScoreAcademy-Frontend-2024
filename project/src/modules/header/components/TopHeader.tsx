@@ -7,12 +7,14 @@ export default function TopHeader() {
   const params = useParams()
   return (
     <Flex
-      h="64px"
+      h="48px"
       w="100%"
       justify={['space-between', 'center', 'center', 'center']}
       alignItems="center"
       bg="colors.primary"
       paddingX="spacings.lg"
+      position="relative"
+      zIndex={10}
     >
       <Box as={Link} href="/">
         <Image src="/sofascore_lockup.svg" alt="SofaScore" width="132px" height="20px" />

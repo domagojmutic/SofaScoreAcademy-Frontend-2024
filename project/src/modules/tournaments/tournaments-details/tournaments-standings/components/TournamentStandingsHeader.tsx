@@ -1,13 +1,20 @@
-import { Box, Flex, Text, Image } from '@kuma-ui/core'
-import { Tournament } from '@/model/Backend'
-import Card from '@/components/Card'
-import iso3311a2 from 'iso-3166-1-alpha-2'
-import Separator from '@/components/Separator'
-import Link from 'next/link'
+import { Standings } from '@/model/Backend'
+import { Box } from '@kuma-ui/core'
 
-interface TournamentStandingsHeaderProps {}
+interface TournamentStandingsHeaderProps {
+  fields: (
+    | {
+        name: string
+        value: (obj: Standings['sortedStandingsRows'][0]) => number
+      }
+    | {
+        name: string
+        value: (obj: Standings['sortedStandingsRows'][0]) => string
+      }
+  )[]
+}
 
-export default function TournamentStandingsHeader() {
+export default function TournamentStandingsHeader({ fields }: TournamentStandingsHeaderProps) {
   return (
     <>
       <thead>
@@ -35,77 +42,21 @@ export default function TournamentStandingsHeader() {
             Team
           </Box>
 
-          <Box
-            as="th"
-            textAlign="center"
-            color="colors.onSurface.nLv2"
-            fontSize="fontSizes.sm"
-            lineHeight="16px"
-            fontWeight="fontWeights.normal"
-            fontStretch="condensed"
-          >
-            P
-          </Box>
-
-          <Box
-            as="th"
-            textAlign="center"
-            color="colors.onSurface.nLv2"
-            fontSize="fontSizes.sm"
-            lineHeight="16px"
-            fontWeight="fontWeights.normal"
-            fontStretch="condensed"
-          >
-            W
-          </Box>
-
-          <Box
-            as="th"
-            textAlign="center"
-            color="colors.onSurface.nLv2"
-            fontSize="fontSizes.sm"
-            lineHeight="16px"
-            fontWeight="fontWeights.normal"
-            fontStretch="condensed"
-          >
-            D
-          </Box>
-
-          <Box
-            as="th"
-            textAlign="center"
-            color="colors.onSurface.nLv2"
-            fontSize="fontSizes.sm"
-            lineHeight="16px"
-            fontWeight="fontWeights.normal"
-            fontStretch="condensed"
-          >
-            L
-          </Box>
-
-          <Box
-            as="th"
-            textAlign="center"
-            color="colors.onSurface.nLv2"
-            fontSize="fontSizes.sm"
-            lineHeight="16px"
-            fontWeight="fontWeights.normal"
-            fontStretch="condensed"
-          >
-            Goals
-          </Box>
-
-          <Box
-            as="th"
-            textAlign="center"
-            color="colors.onSurface.nLv2"
-            fontSize="fontSizes.sm"
-            lineHeight="16px"
-            fontWeight="fontWeights.normal"
-            fontStretch="condensed"
-          >
-            PTS
-          </Box>
+          {fields.map(field => {
+            return (
+              <Box
+                as="th"
+                textAlign="center"
+                color="colors.onSurface.nLv2"
+                fontSize="fontSizes.sm"
+                lineHeight="16px"
+                fontWeight="fontWeights.normal"
+                fontStretch="condensed"
+              >
+                {field.name}
+              </Box>
+            )
+          })}
         </Box>
       </thead>
     </>

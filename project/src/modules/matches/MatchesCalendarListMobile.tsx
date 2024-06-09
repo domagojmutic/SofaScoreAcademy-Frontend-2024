@@ -74,23 +74,24 @@ export default function MatchesCalendarListMobile({
       )}
       {!isLoading && (
         <Card marginX="spacings.sm">
-          {matchesByLeague && matchesByLeague.map(({ tournament, matches }, index) => {
-            return (
-              <Fragment key={tournament.id}>
-                <MatchesTournamentHeader tournament={tournament} />
-                <MatchesList matches={matches} />
-                {index !== matchesByLeague.length - 1 && (
-                  <Separator
-                    direction="horizontal"
-                    length="100%"
-                    color="colors.onSurface.nLv4"
-                    thickness="1px"
-                    marginTop="7px"
-                  />
-                )}
-              </Fragment>
-            )
-          })}
+          {matchesByLeague &&
+            matchesByLeague.map(({ tournament, matches }, index) => {
+              return (
+                <Fragment key={tournament.id}>
+                  <MatchesTournamentHeader tournament={tournament} />
+                  <MatchesList matches={matches} />
+                  {index !== matchesByLeague.length - 1 && (
+                    <Separator
+                      direction="horizontal"
+                      length="100%"
+                      color="colors.onSurface.nLv4"
+                      thickness="1px"
+                      marginTop="7px"
+                    />
+                  )}
+                </Fragment>
+              )
+            })}
         </Card>
       )}
 

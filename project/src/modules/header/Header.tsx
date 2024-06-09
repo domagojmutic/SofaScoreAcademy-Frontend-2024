@@ -4,12 +4,12 @@ import TopHeader from './components/TopHeader'
 import { Sport } from '@/model/Backend'
 
 interface HeaderProps {
-  sports: Sport[],
+  sports: Sport[]
 }
 
 export default function Header(props: HeaderProps) {
   return (
-    <Box as="header">
+    <Box as="header" position={['sticky', 'sticky', 'relative', 'relative']} top={0} zIndex={1}>
       <TopHeader />
       <Navigation sports={props.sports} />
     </Box>

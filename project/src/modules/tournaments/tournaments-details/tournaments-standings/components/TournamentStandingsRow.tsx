@@ -1,14 +1,23 @@
 import { Box, Flex, Text } from '@kuma-ui/core'
 import { Standings } from '@/model/Backend'
-import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 
 interface TournamentStandingsRowProps {
   index: number
   standingsRow: Standings['sortedStandingsRows'][0]
+  fields: (
+    | {
+        name: string
+        value: (obj: Standings['sortedStandingsRows'][0]) => number
+      }
+    | {
+        name: string
+        value: (obj: Standings['sortedStandingsRows'][0]) => string
+      }
+  )[]
 }
 
-export default function TournamentStandingsRow({ index, standingsRow }: TournamentStandingsRowProps) {
+export default function TournamentStandingsRow({ index, standingsRow, fields }: TournamentStandingsRowProps) {
   const params = useParams()
   const router = useRouter()
 
@@ -56,78 +65,22 @@ export default function TournamentStandingsRow({ index, standingsRow }: Tourname
             {standingsRow.team.name}
           </Text>
         </Box>
-        <Box as="td">
-          <Text
-            textAlign="center"
-            color="colors.onSurface.nLv1"
-            fontSize="fontSizes.sm"
-            lineHeight="16px"
-            fontWeight="fontWeights.normal"
-            fontStretch="condensed"
-          >
-            {standingsRow.played}
-          </Text>
-        </Box>
-        <Box as="td">
-          <Text
-            textAlign="center"
-            color="colors.onSurface.nLv1"
-            fontSize="fontSizes.sm"
-            lineHeight="16px"
-            fontWeight="fontWeights.normal"
-            fontStretch="condensed"
-          >
-            {standingsRow.wins}
-          </Text>
-        </Box>
-        <Box as="td">
-          <Text
-            textAlign="center"
-            color="colors.onSurface.nLv1"
-            fontSize="fontSizes.sm"
-            lineHeight="16px"
-            fontWeight="fontWeights.normal"
-            fontStretch="condensed"
-          >
-            {standingsRow.draws}
-          </Text>
-        </Box>
-        <Box as="td">
-          <Text
-            textAlign="center"
-            color="colors.onSurface.nLv1"
-            fontSize="fontSizes.sm"
-            lineHeight="16px"
-            fontWeight="fontWeights.normal"
-            fontStretch="condensed"
-          >
-            {standingsRow.losses}
-          </Text>
-        </Box>
-        <Box as="td">
-          <Text
-            textAlign="center"
-            color="colors.onSurface.nLv1"
-            fontSize="fontSizes.sm"
-            lineHeight="16px"
-            fontWeight="fontWeights.normal"
-            fontStretch="condensed"
-          >
-            {standingsRow.scoresFor}:{standingsRow.scoresAgainst}
-          </Text>
-        </Box>
-        <Box as="td">
-          <Text
-            textAlign="center"
-            color="colors.onSurface.nLv1"
-            fontSize="fontSizes.sm"
-            lineHeight="16px"
-            fontWeight="fontWeights.normal"
-            fontStretch="condensed"
-          >
-            {standingsRow.points}
-          </Text>
-        </Box>
+        {fields.map(field => {
+          return (
+            <Box as="td">
+              <Text
+                textAlign="center"
+                color="colors.onSurface.nLv1"
+                fontSize="fontSizes.sm"
+                lineHeight="16px"
+                fontWeight="fontWeights.normal"
+                fontStretch="condensed"
+              >
+                {field.value(standingsRow)}
+              </Text>
+            </Box>
+          )
+        })}
       </Box>
     </>
   )

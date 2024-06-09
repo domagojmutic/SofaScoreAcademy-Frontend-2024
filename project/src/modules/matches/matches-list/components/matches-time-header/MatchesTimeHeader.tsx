@@ -19,7 +19,8 @@ export default function MatchesTimeHeader({ date, nextDate, prevDate }: MatchesT
       height="48px"
       justifyContent="center"
       boxShadow="0 1px 4px 0 rgba(0, 0, 0, 0.08)"
-      position="relative"
+      position={['sticky', 'sticky', 'relative', 'relative']}
+      top={['96px', '96px', 0, 0]}
     >
       <Button
         width="32px"

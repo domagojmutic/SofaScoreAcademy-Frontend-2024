@@ -15,7 +15,12 @@ interface TournamentDetailsHeaderProps {
 export default function TournamentDetailsHeader({ tournament }: TournamentDetailsHeaderProps) {
   return (
     <>
-      <Card borderRadius={[0, 0, 16, 16]} zIndex="1" position="relative">
+      <Card
+        borderRadius={[0, 0, 16, 16]}
+        zIndex="1"
+        position={['sticky', 'sticky', 'relative', 'relative']}
+        top={['48px', '48px', 0, 0]}
+      >
         <Breadcrumbs
           display={['flex', 'flex', 'none', 'none']}
           items={[tournament.sport.name, tournament.name]}

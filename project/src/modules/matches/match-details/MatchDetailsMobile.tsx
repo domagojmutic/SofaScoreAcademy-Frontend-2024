@@ -34,7 +34,7 @@ export default function MatchesDetailsMobile({
 
   return (
     <>
-      <Card overflow="hidden" paddingBottom="spacings.lg" borderRadius={0}>
+      <Card overflow="hidden" paddingBottom="spacings.lg" borderRadius={0} position="sticky" top="48px">
         {match && (
           <Breadcrumbs
             items={[

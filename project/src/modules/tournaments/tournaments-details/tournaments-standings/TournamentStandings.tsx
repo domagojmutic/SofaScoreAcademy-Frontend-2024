@@ -1,11 +1,8 @@
 'use client'
 
-import { Box, Flex, Text, Image } from '@kuma-ui/core'
-import { Standings, Tournament } from '@/model/Backend'
+import { Box, Flex } from '@kuma-ui/core'
+import { Standings } from '@/model/Backend'
 import Card from '@/components/Card'
-import iso3311a2 from 'iso-3166-1-alpha-2'
-import Separator from '@/components/Separator'
-import Link from 'next/link'
 import TournamentStandingsHeader from './components/TournamentStandingsHeader'
 import TournamentStandingsRow from './components/TournamentStandingsRow'
 import { tournamentStandings } from '@/api/routes'
@@ -21,6 +18,7 @@ interface TournamentStandingsProps {
 
 export default function TournamentStandings({ tournamentStandingsServer }: TournamentStandingsProps) {
   const params = useParams()
+  const fields = standingsFields[params.sport as string]
   const [tournamentStandingsTotal, setTournamentStandingsTotal] = useState<Standings | undefined>(
     tournamentStandingsServer?.find(standings => standings.type === 'total')
   )
@@ -48,13 +46,13 @@ export default function TournamentStandings({ tournamentStandingsServer }: Tourn
           </Flex>
         )}
         <Box as="table" width="100%">
-          <TournamentStandingsHeader />
+          <TournamentStandingsHeader fields={fields} />
           <tbody>
             {tournamentStandingsTotal &&
               tournamentStandingsTotal.sortedStandingsRows.map((row, i) => {
-                return <TournamentStandingsRow standingsRow={row} index={i + 1} key={row.id} />
+                return <TournamentStandingsRow fields={fields} standingsRow={row} index={i + 1} key={row.id} />
               })}
-              
+
             {!tournamentStandingsServer &&
               isLoading &&
               Array.from({ length: 8 }).map((_, i) => {
@@ -65,4 +63,120 @@ export default function TournamentStandings({ tournamentStandingsServer }: Tourn
       </Card>
     </>
   )
+}
+
+const standingsFields: {
+  [key: string]: (
+    | {
+        name: string
+        value: (obj: Standings['sortedStandingsRows'][0]) => number
+      }
+    | {
+        name: string
+        value: (obj: Standings['sortedStandingsRows'][0]) => string
+      }
+  )[]
+} = {
+  football: [
+    {
+      name: 'P',
+      value: (obj: Standings['sortedStandingsRows'][0]) => {
+        return obj.played
+      },
+    },
+    {
+      name: 'W',
+      value: (obj: Standings['sortedStandingsRows'][0]) => {
+        return obj.wins
+      },
+    },
+    {
+      name: 'D',
+      value: (obj: Standings['sortedStandingsRows'][0]) => {
+        return obj.draws
+      },
+    },
+    {
+      name: 'L',
+      value: (obj: Standings['sortedStandingsRows'][0]) => {
+        return obj.losses
+      },
+    },
+    {
+      name: 'Goals',
+      value: (obj: Standings['sortedStandingsRows'][0]) => {
+        return obj.scoresFor + ':' + obj.scoresAgainst
+      },
+    },
+    {
+      name: 'PTS',
+      value: (obj: Standings['sortedStandingsRows'][0]) => {
+        return obj.points
+      },
+    },
+  ],
+  basketball: [
+    {
+      name: 'P',
+      value: (obj: Standings['sortedStandingsRows'][0]) => {
+        return obj.played
+      },
+    },
+    {
+      name: 'W',
+      value: (obj: Standings['sortedStandingsRows'][0]) => {
+        return obj.wins
+      },
+    },
+    {
+      name: 'L',
+      value: (obj: Standings['sortedStandingsRows'][0]) => {
+        return obj.losses
+      },
+    },
+    {
+      name: 'DIFF',
+      value: (obj: Standings['sortedStandingsRows'][0]) => {
+        return obj.scoresAgainst - obj.scoresFor 
+      },
+    },
+    {
+      name: 'PCT',
+      value: (obj: Standings['sortedStandingsRows'][0]) => {
+        return obj.percentage.toFixed(3)
+      },
+    },
+  ],
+  'american-football': [
+    {
+      name: 'P',
+      value: (obj: Standings['sortedStandingsRows'][0]) => {
+        return obj.played
+      },
+    },
+    {
+      name: 'W',
+      value: (obj: Standings['sortedStandingsRows'][0]) => {
+        return obj.wins
+      },
+    },
+    {
+      name: 'D',
+      value: (obj: Standings['sortedStandingsRows'][0]) => {
+        return obj.draws
+      },
+    },
+    {
+      name: 'L',
+      value: (obj: Standings['sortedStandingsRows'][0]) => {
+        return obj.losses
+      },
+    },
+    {
+      name: 'PCT',
+      value: (obj: Standings['sortedStandingsRows'][0]) => {
+        return obj.percentage.toFixed(3)
+      },
+    },
+  ],
 }
