@@ -5,13 +5,15 @@ import MatchesTeam from './components/MatchesTeam'
 import Separator from '@/components/Separator'
 import theme from '../../../../../../kuma.config'
 import { useScreenContext } from '@/context/ScreenContext'
+import { getDateString, getTimeString } from '@/utils/dateUtils'
 
 interface MatchesListItemProps {
   match: Match
   selected: boolean
+  details?: 'status' | 'time'
 }
 
-export default function MatchesListItem({ match, selected }: MatchesListItemProps) {
+export default function MatchesListItem({ match, selected, details = 'status' }: MatchesListItemProps) {
   const screen = useScreenContext()
   return (
     <Flex
@@ -38,24 +40,35 @@ export default function MatchesListItem({ match, selected }: MatchesListItemProp
             textAlign="center"
             fontStretch="condensed"
           >
-            {new Date(match.startDate).toLocaleTimeString(undefined, {
-              hour12: false,
-              hour: '2-digit',
-              minute: '2-digit',
-            })}
+            {getTimeString(new Date(match.startDate))}
           </Text>
         </Box>
-        <Box marginTop="4px">
-          <Text
-            color={match.status === 'inprogress' ? 'colors.live' : 'colors.onSurface.nLv2'}
-            fontSize="fontSizes.xs"
-            lineHeight="16px"
-            textAlign="center"
-            fontStretch="condensed"
-          >
-            {match.status === 'finished' ? 'FT' : match.status === 'inprogress' ? 'AC' : '-'}
-          </Text>
-        </Box>
+        {details === 'status' && (
+          <Box marginTop="4px">
+            <Text
+              color={match.status === 'inprogress' ? 'colors.live' : 'colors.onSurface.nLv2'}
+              fontSize="fontSizes.xs"
+              lineHeight="16px"
+              textAlign="center"
+              fontStretch="condensed"
+            >
+              {match.status === 'finished' ? 'FT' : match.status === 'inprogress' ? 'AC' : '-'}
+            </Text>
+          </Box>
+        )}
+        {details === 'time' && (
+          <Box marginTop="4px">
+            <Text
+              color={match.status === 'inprogress' ? 'colors.live' : 'colors.onSurface.nLv2'}
+              fontSize="fontSizes.xs"
+              lineHeight="16px"
+              textAlign="center"
+              fontStretch="condensed"
+            >
+              {getDateString(new Date(match.startDate), '. ', false, { year: false, month: true, day: true })}
+            </Text>
+          </Box>
+        )}
       </Box>
       <Separator direction="vertical" thickness="1px" length="40px" color="colors.onSurface.nLv4" />
       <Box flexGrow="1" paddingX="16px" paddingY="10px">

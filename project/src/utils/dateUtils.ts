@@ -46,10 +46,46 @@ export const removeDateTime = (date: Date) => {
   return temp
 }
 
-export const getDateString = (date: Date) => {
-  return `${date.getFullYear()}-${date.toLocaleDateString('en', {
-    month: '2-digit',
-  })}-${date.toLocaleDateString('en', {
-    day: '2-digit',
+export const getDateString = (
+  date: Date,
+  delimiter: string = '-',
+  orderReversed: boolean = true,
+  showPart: { year: boolean; month: boolean; day: boolean } = { year: true, month: true, day: true }
+) => {
+  return orderReversed
+    ? `${showPart.year ? date.getFullYear() + delimiter : ''}${
+        showPart.month
+          ? date.toLocaleDateString('en', {
+              month: '2-digit',
+            }) + delimiter
+          : ''
+      }${
+        showPart.day
+          ? date.toLocaleDateString('en', {
+              day: '2-digit',
+            })
+          : ''
+      }`
+    : `${
+        showPart.day
+          ? date.toLocaleDateString('en', {
+              day: '2-digit',
+            }) + delimiter
+          : ''
+      }${
+        showPart.month
+          ? date.toLocaleDateString('en', {
+              month: '2-digit',
+            }) + delimiter
+          : ''
+      }${showPart.year ? date.getFullYear() : ''}`
+}
+
+export const getTimeString = (date: Date, delimiter: string = ':', h_24: boolean = true) => {
+  return `${date.toLocaleTimeString('en', {
+    hour: '2-digit',
+    hour12: !h_24,
+  })}${delimiter}${date.toLocaleTimeString('en', {
+    minute: '2-digit',
   })}`
 }

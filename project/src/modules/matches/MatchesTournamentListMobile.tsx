@@ -59,7 +59,7 @@ export default function MatchesCalendarList({
                 </Text>
               </Box>
               <Card marginX="spacings.sm">
-                <MatchesList matches={matches} />
+                <MatchesList matches={matches} details='time' />
               </Card>
             </Fragment>
           )

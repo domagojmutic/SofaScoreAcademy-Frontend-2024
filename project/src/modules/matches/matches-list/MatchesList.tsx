@@ -4,10 +4,11 @@ import MatchesListItemSkeleton from './components/matches-item/MatchesItemSkelet
 import { useSearchParams } from 'next/navigation'
 
 interface MatchListProps {
-  matches?: Match[]
+  matches?: Match[],
+  details?: 'status' | 'time'
 }
 
-export default function MatchesList({ matches }: MatchListProps) {
+export default function MatchesList({ matches, details }: MatchListProps) {
   const searchParams = useSearchParams()
   const eventId = searchParams.get('event')
 
@@ -19,7 +20,7 @@ export default function MatchesList({ matches }: MatchListProps) {
         })}
       {matches &&
         matches.map(match => {
-          return <MatchesListItem match={match} selected={eventId === `${match.id}`} key={match.id} />
+          return <MatchesListItem match={match} selected={eventId === `${match.id}`} details={details} key={match.id} />
         })}
     </>
   )

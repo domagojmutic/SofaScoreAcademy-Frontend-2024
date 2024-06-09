@@ -59,7 +59,7 @@ export default function MatchesCalendarList({
                     Round {round}
                   </Text>
                 </Box>
-                <MatchesList matches={matches} />
+                <MatchesList matches={matches} details='time' />
               </Fragment>
             )
           })}
