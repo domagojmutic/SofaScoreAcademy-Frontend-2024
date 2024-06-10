@@ -67,7 +67,7 @@ export default function MatchesCalendarList({
 
         {(isLoading || (matches && matches.length > 0 && matchesByRounds.length <= 0)) && (
           <>
-            <Box marginX="spacings.lg" marginY="spacings.sm" width="3em" height="14px" bg="black" opacity="0.25" />
+            <Box marginX="spacings.lg" marginY="spacings.sm" width="3em" height="14px" bg="colors.onSurface.nLv4" />
             <MatchesList />
           </>
         )}

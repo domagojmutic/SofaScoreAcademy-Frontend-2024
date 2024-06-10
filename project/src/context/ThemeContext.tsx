@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useContext, useEffect, useState } from 'react'
 
@@ -10,10 +10,13 @@ interface ContextValue {
 const ThemeContext = createContext<ContextValue>({} as ContextValue)
 
 export const ThemeContextProvider = ({ children }: PropsWithChildren) => {
-  const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark] = useState(localStorage.getItem('theme') === 'dark')
 
   useEffect(() => {
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    if (
+      (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ||
+      localStorage.getItem('theme') === 'dark'
+    ) {
       setIsDark(true)
     }
   }, [])
@@ -21,8 +24,10 @@ export const ThemeContextProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     if (isDark) {
       document.documentElement.classList.add('dark')
+      localStorage.setItem('theme', 'dark')
     } else {
       document.documentElement.classList.remove('dark')
+      localStorage.setItem('theme', 'light')
     }
   }, [isDark])
 

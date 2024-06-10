@@ -1,6 +1,7 @@
 'use client'
 
 import Separator from '@/components/Separator'
+import { useThemeContext } from '@/context/ThemeContext'
 import { Sport } from '@/model/Backend'
 import { Flex, Text, Image, Link } from '@kuma-ui/core'
 import NextLink from 'next/link'
@@ -14,6 +15,7 @@ interface NavigationProps {
 export default function Navigation(props: NavigationProps) {
   const params = useParams()
   const pathname = usePathname()
+  const { isDark } = useThemeContext()
   return (
     <Flex h="48px" w="100%" justify={['stretch', 'center', 'center', 'center']} alignItems="center" bg="colors.primary">
       {props.sports.map(sport => {
@@ -34,7 +36,17 @@ export default function Navigation(props: NavigationProps) {
               paddingX="4px"
               flexDirection={['column', 'row', 'row', 'row']}
             >
-              <Image src={`/icons/icon_${sport.slug.replace('-', '_')}.svg`} alt="" width="16px" height="16px" />
+              <Image
+                src={`/icons/icon_${sport.slug.replace('-', '_')}.svg`}
+                alt=""
+                width="16px"
+                height="16px"
+                filter={
+                  isDark
+                    ? 'brightness(0) saturate(100%) invert(11%) sepia(27%) saturate(513%) hue-rotate(187deg) brightness(90%) contrast(90%)'
+                    : ''
+                }
+              />
               <Text color="colors.surface.s1" fontSize="fontSizes.sm" lineHeight="fontSizes.md">
                 {sport.name}
               </Text>

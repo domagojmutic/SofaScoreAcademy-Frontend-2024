@@ -59,6 +59,9 @@ export interface Player {
   slug: string
   country: Country
   position: string
+  sport: Sport,
+  team: Team,
+  dateOfBirth: string
 }
 
 export interface CardIncident {

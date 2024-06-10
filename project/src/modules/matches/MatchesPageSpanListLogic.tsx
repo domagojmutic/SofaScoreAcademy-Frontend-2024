@@ -2,12 +2,12 @@
 import { Match } from '@/model/Backend'
 import useSWR from 'swr'
 import { ReactNode, useEffect, useState } from 'react'
-import { teamEvents, tournamentEvents } from '@/api/routes'
+import { playerEvents, teamEvents, tournamentEvents } from '@/api/routes'
 import { useParams } from 'next/navigation'
 import React from 'react'
 
 interface MatchListLogicProps {
-  listType: 'tournaments' | 'teams'
+  listType: 'tournaments' | 'teams' | 'player'
 }
 
 export default function MatchesCalendarList({ children, listType }: MatchListLogicProps & { children: ReactNode }) {
@@ -35,6 +35,9 @@ export default function MatchesCalendarList({ children, listType }: MatchListLog
       break
     case 'tournaments':
       eventsUrl = tournamentEvents(params.tournamentId as string, span, localPage)
+      break
+    case 'player':
+      eventsUrl = playerEvents(params.playerId as string, span, localPage)
       break
   }
 

@@ -12,3 +12,5 @@ export const team = (id: string | number) => `http://localhost:3000/api/team/${i
 export const teamPlayers = (id: string | number) => `http://localhost:3000/api/team/${id}/players`
 export const teamEvents = (id: string | number, span: "last" | "next", page: number) => `http://localhost:3000/api/team/${id}/events/${span}/${page}`
 export const teamTournaments = (id: string | number) => `http://localhost:3000/api/team/${id}/tournaments`
+export const player = (id: string | number) => `http://localhost:3000/api/player/${id}`
+export const playerEvents = (id: string | number, span: "last" | "next", page: number) => `http://localhost:3000/api/player/${id}/events/${span}/${page}`

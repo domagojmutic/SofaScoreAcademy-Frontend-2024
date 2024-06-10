@@ -14,7 +14,7 @@ export default function TeamPlayerListItem({ player, sport }: TeamDetailsProps) 
     <>
       <Flex
         as={Link}
-        href={'/' + sport + '/players/' + player.id}
+        href={'/' + sport + '/players/' + player.id + '/matches'}
         paddingX="spacings.md"
         paddingY="spacings.sm"
         gap="spacings.md"
