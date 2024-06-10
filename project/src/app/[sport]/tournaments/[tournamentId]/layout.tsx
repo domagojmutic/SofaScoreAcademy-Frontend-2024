@@ -1,6 +1,6 @@
 import { tournament } from '@/api/routes'
 import { Tournament } from '@/model/Backend'
-import TournamentDetailsHeader from '@/modules/tournaments/tournaments-details/tournaments-header/TournamentDetailsHeader'
+import TournamentDetailsHeader from '@/modules/tournaments/tournaments-header/TournamentDetailsHeader'
 import { Box, Spacer } from '@kuma-ui/core'
 
 export default async function TournamentsLayout({
