@@ -59,8 +59,21 @@ export default function TournamentStandings({
           </Flex>
         )}
         {allowTournamentChanging && (
-          <Box paddingX="spacings.sm" paddingTop="spacings.sm">
-            <Card padding="spacings.sm" bg="colors.surface.s2" borderRadius="8px" height="56px" boxShadow="none">
+          <Box
+            paddingX="spacings.sm"
+            paddingTop="spacings.sm"
+            paddingBottom={['spacings.sm', 'spacings.sm', 0, 0]}
+            bg={['colors.surface.s2', 'colors.surface.s2', 'colors.surface.s1', 'colors.surface.s1']}
+          >
+            <Card
+              display="flex"
+              alignItems="center"
+              padding="spacings.sm"
+              bg={['colors.surface.s1', 'colors.surface.s1', 'colors.surface.s2', 'colors.surface.s2']}
+              borderRadius={['16px', '16px', '8px', '8px']}
+              height={['48px', '48px', '56px', '56px']}
+              boxShadow="none"
+            >
               <TournamentStandingsPicker selectedTournamentId={tournamentLocalId} />
             </Card>
           </Box>

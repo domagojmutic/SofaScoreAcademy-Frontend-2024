@@ -5,6 +5,7 @@ import Breadcrumbs from '@/components/Breadcrumbs'
 import TeamDetailsTop from './components/TeamsTop'
 import TeamDetailsNavigation from './components/TeamsNavigation'
 import { useParams } from 'next/navigation'
+import { toTitleCase } from '@/utils/stringUtils'
 
 interface TournamentDetailsHeaderProps {
   team: Team
@@ -22,7 +23,7 @@ export default function TeamDetailsHeader({ team }: TournamentDetailsHeaderProps
       >
         <Breadcrumbs
           display={['flex', 'flex', 'none', 'none']}
-          items={[params.sport as string, team.name]}
+          items={[toTitleCase((params.sport as string).replaceAll('-', ' ')), team.name]}
           paddingX={'spacings.lg'}
         />
         <TeamDetailsTop team={team} />

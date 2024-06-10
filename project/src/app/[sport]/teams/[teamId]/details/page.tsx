@@ -1,6 +1,8 @@
 import { team, teamEvents, teamPlayers, teamTournaments } from '@/api/routes'
 import { Match, Player, Team, Tournament } from '@/model/Backend'
 import TeamDetails from '@/modules/teams/teams-details/TeamsDetails'
+import TeamDetailsMobile from '@/modules/teams/teams-details/TeamsDetailsMobile'
+import { Box } from '@kuma-ui/core'
 
 export default async function TeamDetailsPage({ params }: { params: { sport: string; teamId: string } }) {
   const teamData: Team = await (await fetch(team(params.teamId), { next: { revalidate: 86400 } })).json()
@@ -16,7 +18,22 @@ export default async function TeamDetailsPage({ params }: { params: { sport: str
 
   return (
     <>
-      <TeamDetails team={teamData} players={teamPlayersData} tournaments={teamTournamentsData} nextMatch={teamNextMatches[0]} />
+      <Box display={['none', 'none', 'block', 'block']}>
+        <TeamDetails
+          team={teamData}
+          players={teamPlayersData}
+          tournaments={teamTournamentsData}
+          nextMatch={teamNextMatches[0]}
+        />
+      </Box>
+      <Box display={['block', 'block', 'none', 'none']}>
+        <TeamDetailsMobile
+          team={teamData}
+          players={teamPlayersData}
+          tournaments={teamTournamentsData}
+          nextMatch={teamNextMatches[0]}
+        />
+      </Box>
     </>
   )
 }

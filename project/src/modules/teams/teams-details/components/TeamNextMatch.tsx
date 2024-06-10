@@ -1,4 +1,5 @@
 import { tournament } from '@/api/routes'
+import Card from '@/components/Card'
 import DonutChart from '@/components/DonutChart'
 import Separator from '@/components/Separator'
 import { Match, Player, Team } from '@/model/Backend'
@@ -21,11 +22,14 @@ export default function TeamNextMatch({ match }: TeamNextMatchProps) {
         lineHeight="20px"
         color="colors.onSurface.nLv1"
         textAlign="center"
+        marginBottom={['spacings.md', 'spacings.md', 0, 0]}
       >
         Next Match
       </Text>
-      <MatchesTournamentHeader tournament={match.tournament} />
-      <MatchesList matches={[match]} details="time" clickable={false} />
+      <Card bg={['colors.surface.s2', 'colors.surface.s2', 'transparent', 'transparent']} boxShadow="none">
+        <MatchesTournamentHeader tournament={match.tournament} />
+        <MatchesList matches={[match]} details="time" clickable={false} />
+      </Card>
     </>
   )
 }

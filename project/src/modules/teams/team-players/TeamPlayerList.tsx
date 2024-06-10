@@ -6,15 +6,14 @@ import { Fragment } from 'react'
 import Separator from '@/components/Separator'
 
 interface TeamPlayerListProps {
-  team: Team
   players: Player[]
   sport: string
 }
 
-export default function TeamPlayerList({ team, players, sport }: TeamPlayerListProps) {
+export default function TeamPlayerList({ players, sport }: TeamPlayerListProps) {
   return (
     <>
-      <Card paddingBottom="spacings.lg">
+      <Card paddingBottom="spacings.lg" borderRadius={[0, 0, 16, 16]}>
         <Box height="48px" paddingTop="spacings.xxl" paddingBottom="spacings.sm" paddingLeft="spacings.lg">
           <Text color="colors.onSurface.nLv1" fontWeight="fontWeights.bold" fontSize="fontSizes.xs" lineHeight="16px">
             Players

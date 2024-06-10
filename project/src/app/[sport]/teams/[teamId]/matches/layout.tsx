@@ -11,7 +11,7 @@ export default async function TeamsLayout({
 }) {
   return (
     <>
-      <Grid gridTemplateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)']} gap="spacings.xxl">
+      <Grid gridTemplateColumns={['1fr', '1fr', 'repeat(2, 1fr)', 'repeat(2, 1fr)']} gap="spacings.xxl">
         <Box>{matchesList}</Box>
         <Box>{matchDetails}</Box>
       </Grid>

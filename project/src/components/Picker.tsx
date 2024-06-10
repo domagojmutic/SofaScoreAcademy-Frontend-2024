@@ -7,7 +7,7 @@ interface PickerProps {
   values: { value: string | number; name: string; img: string }[]
 }
 
-export default function Picker({ value, values, ...rest }: PickerProps & BoxProps) {
+export default function Picker({ value, values, bg, ...rest }: PickerProps & BoxProps) {
   const [selectedValue, setSelectedValue] = useState(values.find(val => val.value === value))
   const [optionsOpen, setOptionsOpen] = useState(false)
 
@@ -15,7 +15,8 @@ export default function Picker({ value, values, ...rest }: PickerProps & BoxProp
     <>
       <Box position="relative" display="inline-block">
         <Flex
-          bg="colors.surface.s1"
+          bg={bg}
+          opacity={1}
           justifyContent="center"
           alignItems="center"
           cursor="pointer"
@@ -23,16 +24,17 @@ export default function Picker({ value, values, ...rest }: PickerProps & BoxProp
           onClick={() => setOptionsOpen(old => !old)}
           {...rest}
         >
-          <Item {...selectedValue} />
+          <Item {...selectedValue} {...rest} />
           <Image src="/ic_chevron_down.svg" />
         </Flex>
         <Box
           display={optionsOpen ? 'block' : 'none'}
           width="100%"
           position="absolute"
-          bg="colors.surface.s1"
+          bg={bg}
+          opacity={1}
           boxShadow="0 1px 4px 0 rgba(0, 0, 0, 0.08)"
-          transform="translateY(-5px)"
+          transform={['translateY(-2px)', 'translateY(-2px)', 'translateY(-5px)', 'translateY(-5px)']}
         >
           {values.map(val => (
             <Item {...val} setValue={setSelectedValue} setOpened={setOptionsOpen} key={val.value} />
@@ -49,20 +51,23 @@ function Item({
   img,
   setValue,
   setOpened,
+  bg,
+  ...rest
 }: {
   value?: string | number
   name?: string
   img?: string
   setValue?: (val: any) => void
   setOpened?: (val: boolean) => void
-}) {
+} & BoxProps) {
   return (
     <Flex
       gap="spacings.sm"
-      bg="colors.surface.s1"
+      bg={bg}
       paddingX="spacings.sm"
-      paddingY="spacings.md"
+      paddingY={[4, 4, 'spacings.md', 'spacings.md']}
       cursor="pointer"
+      opacity={1}
       onClick={() => {
         if (setValue) {
           setValue({ value, name, img })

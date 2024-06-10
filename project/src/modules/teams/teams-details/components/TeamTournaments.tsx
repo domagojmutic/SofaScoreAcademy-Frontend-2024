@@ -1,5 +1,6 @@
 import { Tournament } from '@/model/Backend'
 import { Flex, Image, Text } from '@kuma-ui/core'
+import Link from 'next/link'
 
 interface TeamTournamentsProps {
   tournaments: Tournament[]
@@ -23,12 +24,15 @@ export default function TeamTournaments({ tournaments }: TeamTournamentsProps) {
         {tournaments.map(tournament => {
           return (
             <Flex
+              as={Link}
+              href={'/' + tournament.sport.slug + '/tournaments/' + tournament.id + '/matches'}
               flexGrow="1"
               flexDirection="column"
               justifyContent="center"
               alignItems="center"
               gap="4px"
               paddingY="spacings.sm"
+              key={tournament.id}
             >
               <Image src={`/api/tournament/${tournament.id}/image`} width="40px" height="40px" />
               <Text fontSize="fontSizes.xs" lineHeight="16px" color="colors.onSurface.nLv2" textAlign="center">
