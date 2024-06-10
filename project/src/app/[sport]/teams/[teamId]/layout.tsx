@@ -15,7 +15,7 @@ export default async function TeamsLayout({
     <>
       <Box gridColumn="span 2">
         <TeamDetailsHeader team={teamData} />
-        <Spacer display={["none", "none", "block", "block"]} size="spacings.md" />
+        <Spacer display={['none', 'none', 'block', 'block']} size="spacings.md" />
         {children}
       </Box>
     </>

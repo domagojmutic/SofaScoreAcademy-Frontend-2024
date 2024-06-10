@@ -22,7 +22,15 @@ export default function MatchesList({ matches, details, clickable = true }: Matc
         })}
       {matches &&
         matches.map(match => {
-          return <MatchesListItem match={match} selected={eventId === `${match.id}`} details={details} clickable={clickable} key={match.id} />
+          return (
+            <MatchesListItem
+              match={match}
+              selected={eventId === `${match.id}`}
+              details={details}
+              clickable={clickable}
+              key={match.id}
+            />
+          )
         })}
     </>
   )

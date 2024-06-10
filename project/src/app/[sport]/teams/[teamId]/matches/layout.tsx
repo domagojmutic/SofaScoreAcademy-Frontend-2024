@@ -1,4 +1,3 @@
-import { tournament } from '@/api/routes'
 import { Box, Grid } from '@kuma-ui/core'
 
 export default async function TeamsLayout({

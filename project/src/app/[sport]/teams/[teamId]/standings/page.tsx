@@ -1,5 +1,5 @@
-import { team, teamTournaments, tournamentStandings } from '@/api/routes'
-import { Standings, Team, Tournament } from '@/model/Backend'
+import { teamTournaments, tournamentStandings } from '@/api/routes'
+import { Standings, Tournament } from '@/model/Backend'
 import TournamentStandings from '@/modules/tournaments/tournaments-standings/TournamentStandings'
 
 export default async function ReamStandingsPage({ params }: { params: { sport: string; teamId: string } }) {

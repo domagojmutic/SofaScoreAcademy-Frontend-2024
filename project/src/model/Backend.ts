@@ -59,8 +59,8 @@ export interface Player {
   slug: string
   country: Country
   position: string
-  sport: Sport,
-  team: Team,
+  sport: Sport
+  team: Team
   dateOfBirth: string
 }
 

@@ -1,15 +1,9 @@
 import Separator from '@/components/Separator'
 import { Box, Flex } from '@kuma-ui/core'
-import Link from 'next/link'
 
 export default function MatchesListItemSkeleton() {
   return (
-    <Flex
-      paddingX="spacings.lg"
-      paddingY="spacings.sm"
-      display="flex"
-      alignItems="center"
-    >
+    <Flex paddingX="spacings.lg" paddingY="spacings.sm" display="flex" alignItems="center">
       <Box width="64px" height="56px" paddingX="4px" paddingY="10px">
         <Box height="16px" width="2em" bg="colors.onSurface.nLv4" marginX="auto" />
         <Box marginTop="4px" height="16px" width="2em" bg="colors.onSurface.nLv4" marginX="auto" />

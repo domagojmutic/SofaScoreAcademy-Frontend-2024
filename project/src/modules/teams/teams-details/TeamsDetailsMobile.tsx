@@ -1,7 +1,7 @@
 import { Match, Player, Team, Tournament } from '@/model/Backend'
 import TeamInfo from './components/TeamInfo'
 import Card from '@/components/Card'
-import { Box, Flex, Grid } from '@kuma-ui/core'
+import { Box, Flex } from '@kuma-ui/core'
 import TeamTournaments from './components/TeamTournaments'
 import TeamVenue from './components/TeamVenue'
 import TeamNextMatch from './components/TeamNextMatch'

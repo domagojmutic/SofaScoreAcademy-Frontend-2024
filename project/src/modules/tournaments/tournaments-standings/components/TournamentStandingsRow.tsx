@@ -32,7 +32,7 @@ export default function TournamentStandingsRow({ index, standingsRow, fields, se
         onClick={() => {
           router.push('/' + params.sport + '/teams/' + standingsRow.team.id + '/standings')
         }}
-        _hover={{bg: "colors.surface.s2"}}
+        _hover={{ bg: 'colors.surface.s2' }}
       >
         <Box as="td" width="24px" paddingX="spacings.sm">
           <Flex

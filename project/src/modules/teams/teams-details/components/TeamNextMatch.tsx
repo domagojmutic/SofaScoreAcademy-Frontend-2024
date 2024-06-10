@@ -1,11 +1,8 @@
-import { tournament } from '@/api/routes'
 import Card from '@/components/Card'
-import DonutChart from '@/components/DonutChart'
-import Separator from '@/components/Separator'
-import { Match, Player, Team } from '@/model/Backend'
+import { Match } from '@/model/Backend'
 import MatchesList from '@/modules/matches/matches-list/MatchesList'
 import MatchesTournamentHeader from '@/modules/matches/matches-list/components/MatchesTournamentHeader'
-import { Box, Flex, Image, Text } from '@kuma-ui/core'
+import { Text } from '@kuma-ui/core'
 
 interface TeamNextMatchProps {
   match: Match

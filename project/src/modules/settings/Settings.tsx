@@ -1,6 +1,6 @@
 import Card from '@/components/Card'
 import { Text } from '@kuma-ui/core'
-import { Box, Flex } from '@kuma-ui/core'
+import { Flex } from '@kuma-ui/core'
 import LanguageSelector from './components/LanguageSelector'
 import ThemeSelector from './components/ThemeSelector'
 import DateFormatSelector from './components/DateFormatSelector'

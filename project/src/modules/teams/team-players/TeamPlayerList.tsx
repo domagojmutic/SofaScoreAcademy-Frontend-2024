@@ -1,4 +1,4 @@
-import { Match, Player, Team, Tournament } from '@/model/Backend'
+import { Player } from '@/model/Backend'
 import Card from '@/components/Card'
 import TeamPlayerListItem from './components/TeamPlayerListItem'
 import { Box, Text } from '@kuma-ui/core'

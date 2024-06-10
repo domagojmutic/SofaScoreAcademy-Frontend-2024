@@ -1,5 +1,3 @@
-import { events } from '@/api/routes'
-import { Match } from '@/model/Backend'
 import MatchesTournamentList from '@/modules/matches/MatchesPageSpanList'
 import MatchesTournamentListLogic from '@/modules/matches/MatchesPageSpanListLogic'
 import MatchesTournamentListMobile from '@/modules/matches/MatchesPageSpanListMobile'

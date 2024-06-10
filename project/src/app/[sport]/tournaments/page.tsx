@@ -10,7 +10,7 @@ export default async function TournamentsPage({ params }: { params: { sport: str
 
   return (
     <>
-      <Box display={["block", "block", "block", "none"]}>
+      <Box display={['block', 'block', 'block', 'none']}>
         <TournamentsList tournaments={tournamentsData} params={params} />
       </Box>
     </>

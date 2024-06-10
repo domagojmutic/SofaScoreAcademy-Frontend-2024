@@ -1,10 +1,8 @@
 import { Player } from '@/model/Backend'
 import Card from '@/components/Card'
 import Breadcrumbs from '@/components/Breadcrumbs'
-import { toTitleCase } from '@/utils/stringUtils'
 import PlayersTop from './components/PlayersTop'
 import PlayersDetails from './components/PlayersDetails'
-import { Box } from '@kuma-ui/core'
 
 interface PlayersHeaderProps {
   player: Player
@@ -28,11 +26,7 @@ export default function PlayersHeader({ player }: PlayersHeaderProps) {
         />
         <PlayersTop player={player} />
       </Card>
-      <Card
-        borderRadius={[0, 0, 16, 16]}
-        paddingX="spacings.lg"
-        paddingBottom="spacings.xxl"
-      >
+      <Card borderRadius={[0, 0, 16, 16]} paddingX="spacings.lg" paddingBottom="spacings.xxl">
         <PlayersDetails player={player} />
       </Card>
     </>

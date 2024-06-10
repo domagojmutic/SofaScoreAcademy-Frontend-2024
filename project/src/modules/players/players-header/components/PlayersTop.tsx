@@ -1,7 +1,5 @@
 import { Box, Flex, Text, Image } from '@kuma-ui/core'
-import { Player, Team } from '@/model/Backend'
-import iso3311a2 from 'iso-3166-1-alpha-2'
-import { getStandardCountryName } from '@/utils/country'
+import { Player } from '@/model/Backend'
 
 interface PlayersTopProps {
   player: Player
